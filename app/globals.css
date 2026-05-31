@@ -1,0 +1,180 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Lato:wght@300;400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Brand Colors */
+    --brand-navy: 218 67% 16%;
+    --brand-navy-dark: 220 72% 9%;
+    --brand-navy-mid: 220 50% 22%;
+    --brand-gold: 38 55% 50%;
+    --brand-gold-light: 42 68% 65%;
+    --brand-cream: 42 33% 97%;
+    --brand-warm: 38 20% 94%;
+
+    /* Shadcn-style tokens */
+    --background: 42 33% 97%;
+    --foreground: 220 40% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 40% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 40% 12%;
+    --primary: 218 67% 16%;
+    --primary-foreground: 42 33% 97%;
+    --secondary: 38 20% 94%;
+    --secondary-foreground: 220 40% 12%;
+    --muted: 38 20% 94%;
+    --muted-foreground: 220 15% 45%;
+    --accent: 38 55% 50%;
+    --accent-foreground: 220 72% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 38 20% 87%;
+    --input: 38 20% 87%;
+    --ring: 38 55% 50%;
+    --radius: 0.375rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Lato', sans-serif;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cormorant Garant', serif;
+  }
+}
+
+/* Custom Utilities */
+@layer utilities {
+  .font-display {
+    font-family: 'Cormorant Garant', serif;
+  }
+  .font-body {
+    font-family: 'Lato', sans-serif;
+  }
+  .bg-navy {
+    background-color: hsl(var(--brand-navy));
+  }
+  .bg-navy-dark {
+    background-color: hsl(var(--brand-navy-dark));
+  }
+  .bg-gold {
+    background-color: hsl(var(--brand-gold));
+  }
+  .text-navy {
+    color: hsl(var(--brand-navy));
+  }
+  .text-gold {
+    color: hsl(var(--brand-gold));
+  }
+  .text-gold-light {
+    color: hsl(var(--brand-gold-light));
+  }
+  .border-gold {
+    border-color: hsl(var(--brand-gold));
+  }
+  .bg-cream {
+    background-color: hsl(var(--brand-cream));
+  }
+  .bg-warm {
+    background-color: hsl(var(--brand-warm));
+  }
+}
+
+/* Scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes rotateSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse-gold {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 1s ease forwards;
+}
+
+.animate-spin-slow {
+  animation: rotateSlow 30s linear infinite;
+}
+
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+.delay-600 { animation-delay: 0.6s; }
+
+/* Hide Next.js badge and error messages */
+body nextjs-portal {
+  display: none;
+}
+
+/* Testimonial carousel */
+.testimonial-track {
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Gold shimmer text */
+.text-shimmer {
+  background: linear-gradient(
+    90deg,
+    hsl(var(--brand-gold)) 0%,
+    hsl(var(--brand-gold-light)) 50%,
+    hsl(var(--brand-gold)) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Grain overlay */
+.grain-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  opacity: 0.4;
+}
