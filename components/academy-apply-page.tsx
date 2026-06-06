@@ -133,14 +133,15 @@ function ApplicationForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("submitting");
-    console.log("HPCC application submitted:", form);
+
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           type: "hpcc",
-          name: `${form.firstName} ${form.lastName}`,
+          firstName: form.firstName,
+          lastName: form.lastName,
           email: form.email,
           phone: form.phone,
           organisation: form.organisation,
@@ -150,6 +151,7 @@ function ApplicationForm() {
           heardFrom: form.heardFrom,
         }),
       });
+
       if (!res.ok) throw new Error("Send failed");
       setStatus("success");
     } catch (err) {
@@ -157,7 +159,6 @@ function ApplicationForm() {
       setStatus("error");
     }
   };
-
   if (status === "error") {
     return (
       <div className="bg-white border border-border p-10 text-center">
@@ -314,8 +315,7 @@ function ApplicationForm() {
       </button>
 
       <p className="font-body text-xs text-foreground/40 text-center leading-relaxed">
-        Your application will open in your email client, pre-filled and ready to send.
-        We review all applications and respond within 3 business days.
+        We review all applications personally and respond within 3 business days.
       </p>
     </form>
   );
@@ -324,7 +324,6 @@ function ApplicationForm() {
 // ─── Main Export ──────────────────────────────────────────────────────────────
 export default function AcademyApplyPage() {
   const [toast, setToast] = useState<string | null>(null);
-  console.log("AcademyApplyPage rendered");
 
   return (
     <div className="min-h-screen bg-background">

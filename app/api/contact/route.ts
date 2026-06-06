@@ -14,7 +14,6 @@ export async function POST(req: NextRequest) {
   const body = await req.json();
   const { type, ...fields } = body;
 
-  // Build a readable HTML email body from submitted fields
   const rows = Object.entries(fields)
     .map(([key, value]) => {
       const label = key.replace(/([A-Z])/g, " $1").replace(/^./, (s) => s.toUpperCase());

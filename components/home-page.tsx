@@ -100,7 +100,7 @@ function Navigation({ onNotImplemented }: { onNotImplemented: (msg: string) => v
     { label: "Insight", href: "/insight" },
     { label: "Impact", href: "/impact" },
     { label: "Academy", href: "/academy" },
-    { label: "Assessments", href: "https://beingatfullpotential.io/", external: true },
+    { label: "Assessments", href: "/assessments" },
     { label: "Contact", href: "#contact", scroll: true },
   ];
 
