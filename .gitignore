@@ -21,6 +21,9 @@
 .cache
 .local
 .lesshst
+.env
+.env.local
+.env*.local
 
 # archives
 *.zip
