@@ -14,17 +14,31 @@ export const metadata: Metadata = {
     "human potential coach",
     "conscious leadership",
   ],
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
+  },
   openGraph: {
     title: "BEING at Full Potential | Human Potential Development",
     description:
       "Specializing in Human Potential development to enable breakthroughs in employee engagement, innovation and the bottom line.",
     images: [
       {
-        url: "https://beingatfullpotential.com/wp-content/uploads/2019/11/Logo-light.png",
-        width: 400,
-        height: 200,
+        url: "/brand/og-measure-what-matters.png",
+        width: 1200,
+        height: 630,
+        alt: "Measure What Matters Most — Human Potential Assessment by BEING at Full Potential",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/brand/og-measure-what-matters.png"],
   },
 };
 

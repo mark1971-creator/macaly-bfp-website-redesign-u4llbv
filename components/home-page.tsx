@@ -118,13 +118,16 @@ function Navigation({ onNotImplemented }: { onNotImplemented: (msg: string) => v
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
-        <a href="#hero" onClick={() => scrollTo("hero")} className="flex items-center gap-3 group">
-          <img
+        <Link href="/" className="flex items-center gap-3 group">
+          <Image
             src="https://beingatfullpotential.com/wp-content/uploads/2019/11/Logo-light.png"
             alt="BEING at Full Potential"
+            width={120}
+            height={48}
             className="h-12 w-auto object-contain"
+            priority
           />
-        </a>
+        </Link>
 
         {/* Desktop Nav */}
         <div className="hidden lg:flex items-center gap-8">
