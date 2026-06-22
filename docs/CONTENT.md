@@ -134,11 +134,20 @@ Root layout (`app/layout.tsx`) sets site-wide favicon, Open Graph defaults, and 
 
 ## Images
 
-Images are **not** stored in this repo (except brand assets in `public/brand/`). Page images load from:
+Legacy WordPress media is **self-hosted** in `public/wp-content/uploads/…` and referenced as `/wp-content/uploads/…` in code and `lib/article-content.json`.
 
-- `beingatfullpotential.com/wp-content/uploads/…` (legacy WordPress CDN)
+Additional images load from:
+
 - Pexels stock photos
 - Third-party logos (IDG, client logos)
+
+To re-fetch missing media from the Internet Archive:
+
+```bash
+npm run migrate:images
+```
+
+Missing images fall back to `/images/article-fallback.jpg` via the `SafeImg` component.
 
 `next.config.js` sets `images: { unoptimized: true }` — no Next.js Image Optimization pipeline required.
 

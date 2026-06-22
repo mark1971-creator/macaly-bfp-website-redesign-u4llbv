@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { SafeImg } from "@/components/safe-img";
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 type ImageTextContent =
@@ -60,7 +61,7 @@ function Nav() {
       <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-20">
         <Link href="/" className="flex items-center gap-3">
           <Image
-            src="https://beingatfullpotential.com/wp-content/uploads/2019/11/Logo-light.png"
+            src="/wp-content/uploads/2019/11/Logo-light.png"
             alt="BEING at Full Potential"
             width={120}
             height={48}
@@ -145,7 +146,7 @@ function SkillGridBlock({
           {isIcon ? (
             <div className="w-44 h-44 rounded-full overflow-hidden shrink-0 border border-foreground/10 shadow-sm">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <SafeImg
                 src={item.image}
                 alt={item.name}
                 className="w-full h-full object-contain"
@@ -154,7 +155,7 @@ function SkillGridBlock({
           ) : (
             <div className="w-full aspect-[4/3] overflow-hidden rounded-sm">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <SafeImg
                 src={item.image}
                 alt={item.name}
                 className="w-full h-full object-cover"
@@ -212,7 +213,7 @@ function ImageTextSplitBlock({
     <div className="grid grid-cols-1 md:grid-cols-2 gap-10 my-10 items-start">
       <div>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <SafeImg
           src={block.src}
           alt={block.alt}
           className="w-full rounded-sm object-cover"
@@ -367,7 +368,7 @@ function RenderBlock({ block, index }: { block: Block; index: number }) {
     return (
       <figure className="my-8">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <SafeImg
           src={block.src}
           alt={block.alt || ""}
           className="w-full rounded-sm object-cover"
@@ -399,7 +400,7 @@ function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           <Link href="/">
             <Image
-              src="https://beingatfullpotential.com/wp-content/uploads/2019/11/Logo-light.png"
+              src="/wp-content/uploads/2019/11/Logo-light.png"
               alt="BEING at Full Potential"
               width={120}
               height={48}
@@ -517,7 +518,7 @@ export default function ArticleDetailContent({
         <div className="w-full bg-background">
           <div className="max-w-4xl mx-auto px-6 lg:px-12 pt-10">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <SafeImg
               src={article.image}
               alt={article.title}
               className="w-full object-cover rounded-sm"

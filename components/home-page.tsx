@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { SafeImg } from "@/components/safe-img";
 
 // ─── Toast Notification ────────────────────────────────────────────────────────
 function Toast({ message, onClose }: { message: string; onClose: () => void }) {
@@ -120,7 +121,7 @@ function Navigation({ onNotImplemented }: { onNotImplemented: (msg: string) => v
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 group">
           <Image
-            src="https://beingatfullpotential.com/wp-content/uploads/2019/11/Logo-light.png"
+            src="/wp-content/uploads/2019/11/Logo-light.png"
             alt="BEING at Full Potential"
             width={120}
             height={48}
@@ -460,7 +461,7 @@ function InsightSection({ onNotImplemented }: { onNotImplemented: (msg: string) 
               className="group block bg-cream hover:shadow-xl transition-all duration-500 hover:-translate-y-1"
             >
               <div className="relative aspect-[16/9] overflow-hidden bg-navy/5">
-                <img
+                <SafeImg
                   src={article.image}
                   alt={article.title}
                   className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
@@ -667,7 +668,7 @@ const teamMembers = [
     name: "Peter Leong",
     location: "New Zealand",
     email: "peter@beingatfullpotential.nz",
-    image: "https://beingatfullpotential.com/wp-content/uploads/2021/08/Peter-150x150.jpg",
+    image: "/wp-content/uploads/2021/08/Peter-150x150.jpg",
     bio: "Facilitating transformational change in the field of organisational development, change management, integral leadership development, and full potential youth empowerment.",
     href: "mailto:peter@beingatfullpotential.nz",
   },
@@ -675,7 +676,7 @@ const teamMembers = [
     name: "Amrita Singh",
     location: "India",
     email: "amrita@backtosource.in",
-    image: "https://beingatfullpotential.com/wp-content/uploads/2025/02/amrita-singh-3-150x150.jpg",
+    image: "/wp-content/uploads/2025/02/amrita-singh-3-150x150.jpg",
     bio: "Amrita bears the unique ability to empathize, energize and encourage individuals. Her style of facilitation is empowering as she supports her audience to access their inner wisdom.",
     href: "https://www.linkedin.com/in/amritaasingh/",
   },
@@ -683,7 +684,7 @@ const teamMembers = [
     name: "Andrew Thornton",
     location: "United Kingdom",
     email: "andrew@heartinbusiness.org",
-    image: "https://beingatfullpotential.com/wp-content/uploads/2021/08/andrew.jpg",
+    image: "/wp-content/uploads/2021/08/andrew.jpg",
     bio: "I believe that businesses run with a Heart deliver better results for all stakeholders — a happier, better place to work for employees, customers and communities.",
     href: "mailto:andrew@heartinbusiness.org",
   },
@@ -713,7 +714,7 @@ function TeamSection({ onNotImplemented }: { onNotImplemented: (msg: string) => 
               className="group text-center p-8 bg-cream hover:shadow-xl transition-all duration-500 hover:-translate-y-1"
             >
               <div className="w-28 h-28 rounded-full overflow-hidden mx-auto mb-6 ring-2 ring-gold/30 group-hover:ring-gold transition-all duration-300">
-                <img
+                <SafeImg
                   src={member.image}
                   alt={member.name}
                   className="w-full h-full object-cover"
@@ -766,7 +767,7 @@ function AcademySection({ onNotImplemented }: { onNotImplemented: (msg: string) 
           >
             <span className="inline-block font-body text-xs tracking-widest uppercase text-gold bg-gold/10 px-3 py-1 mb-4">Online · 6 Weeks</span>
             <div className="aspect-[3/1] overflow-hidden mb-4 bg-navy flex items-center justify-center">
-              <img
+              <SafeImg
                 src="https://innerdevelopmentgoals.org/wp-content/uploads/2024/11/IDG_Logo_Horizontal_Tag_BW_Neg-600x328.png"
                 alt="Inner Development Goals"
                 className="h-16 w-auto object-contain group-hover:scale-105 transition-transform duration-700"
@@ -789,7 +790,7 @@ function AcademySection({ onNotImplemented }: { onNotImplemented: (msg: string) 
           >
             <span className="inline-block font-body text-xs tracking-widest uppercase text-gold bg-gold/10 px-3 py-1 mb-4">Online • ICF Approved</span>
             <div className="aspect-[3/1] overflow-hidden mb-4 bg-navy/5">
-              <img
+              <SafeImg
                 src="https://images.pexels.com/photos/5711372/pexels-photo-5711372.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
                 alt="Human Potential Coach Certification"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
@@ -856,10 +857,10 @@ function StandardsSection({ onNotImplemented }: { onNotImplemented: (msg: string
 
 // ─── Clients Section ───────────────────────────────────────────────────────────
 const clients = [
-  { name: "Procter & Gamble", logo: "https://beingatfullpotential.com/wp-content/uploads/2019/05/PG.png" },
-  { name: "Teach for America", logo: "https://beingatfullpotential.com/wp-content/uploads/2019/05/TFA.jpg" },
-  { name: "Omega Healthcare", logo: "https://beingatfullpotential.com/wp-content/uploads/2019/05/Omega.png" },
-  { name: "AKQA", logo: "https://beingatfullpotential.com/wp-content/uploads/2019/05/akqa.png" },
+  { name: "Procter & Gamble", logo: "/wp-content/uploads/2019/05/PG.png" },
+  { name: "Teach for America", logo: "/wp-content/uploads/2019/05/TFA.jpg" },
+  { name: "Omega Healthcare", logo: "/wp-content/uploads/2019/05/Omega.png" },
+  { name: "AKQA", logo: "/wp-content/uploads/2019/05/akqa.png" },
 ];
 
 function ClientsSection({ onNotImplemented }: { onNotImplemented: (msg: string) => void }) {
@@ -877,7 +878,7 @@ function ClientsSection({ onNotImplemented }: { onNotImplemented: (msg: string) 
               key={i}
               className="flex items-center justify-center opacity-50 hover:opacity-100 transition-opacity duration-300 grayscale hover:grayscale-0 filter"
             >
-              <img
+              <SafeImg
                 src={client.logo}
                 alt={client.name}
                 className="h-12 w-auto object-contain max-w-[140px]"
@@ -1078,8 +1079,8 @@ function Footer({ onNotImplemented }: { onNotImplemented: (msg: string) => void 
         <div className="grid md:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
           <div className="md:col-span-2">
-            <img
-              src="https://beingatfullpotential.com/wp-content/uploads/2019/11/Logo-light.png"
+            <SafeImg
+              src="/wp-content/uploads/2019/11/Logo-light.png"
               alt="BEING at Full Potential"
               className="h-14 w-auto object-contain mb-4"
             />

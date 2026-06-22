@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { SafeImg } from "@/components/safe-img";
 
 // ─── Toast ──────────────────────────────────────────────────────────────────
 function Toast({ message, onClose }: { message: string; onClose: () => void }) {
@@ -36,7 +37,7 @@ function Nav({ onNotImplemented }: { onNotImplemented: (msg: string) => void }) 
       <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-20">
         <Link href="/" className="flex items-center gap-3">
           <Image
-            src="https://beingatfullpotential.com/wp-content/uploads/2019/11/Logo-light.png"
+            src="/wp-content/uploads/2019/11/Logo-light.png"
             alt="BEING at Full Potential"
             width={120}
             height={48}
@@ -110,7 +111,7 @@ function Footer() {
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-16 grid md:grid-cols-3 gap-12">
         <div>
           <Image
-            src="https://beingatfullpotential.com/wp-content/uploads/2019/11/Logo-light.png"
+            src="/wp-content/uploads/2019/11/Logo-light.png"
             alt="BEING at Full Potential"
             width={120}
             height={48}
@@ -250,7 +251,7 @@ const clientStories = [
 
 const caseStudies = [
   {
-    image: "https://beingatfullpotential.com/wp-content/uploads/2019/09/10626797_1218979294781847_4220713866197897045_n.jpg",
+    image: "/wp-content/uploads/2019/09/10626797_1218979294781847_4220713866197897045_n.jpg",
     client: "Omega Healthcare Management Services",
     sector: "Healthcare · India",
     title: "Human Potential-Based Restructuring",
@@ -265,7 +266,7 @@ const caseStudies = [
     href: "/case-studies/omega-hms",
   },
   {
-    image: "https://beingatfullpotential.com/wp-content/uploads/2017/06/IMG_2327-2-1080x675.jpg",
+    image: "/wp-content/uploads/2017/06/IMG_2327-2-1080x675.jpg",
     client: "Thornton's Budgens",
     sector: "Retail · London, UK",
     title: "Unleashing Self-Leadership in a Supermarket",
@@ -369,7 +370,7 @@ function VideoCard({ story }: { story: typeof clientStories[0] }) {
           />
         ) : (
           <>
-            <img
+            <SafeImg
               src={`https://img.youtube.com/vi/${story.videoId}/maxresdefault.jpg`}
               alt={story.title}
               className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
@@ -416,7 +417,7 @@ export default function ImpactPage() {
       {/* ── HERO ──────────────────────────────────────────────────────────────── */}
       <section className="relative min-h-[60vh] flex items-end bg-navy overflow-hidden">
         {/* Nature background image */}
-        <img
+        <SafeImg
           src="https://images.pexels.com/photos/34392630/pexels-photo-34392630.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
           alt=""
           aria-hidden="true"
@@ -494,7 +495,7 @@ export default function ImpactPage() {
             {trustedOrgs.map((org) =>
               org.logo ? (
                 <div key={org.name} className="flex flex-col items-center gap-2 group" title={org.name}>
-                  <img
+                  <SafeImg
                     src={org.logo}
                     alt={org.name}
                     className="h-8 w-auto object-contain opacity-40 grayscale group-hover:opacity-70 group-hover:grayscale-0 transition-all duration-300"
@@ -562,7 +563,7 @@ export default function ImpactPage() {
               >
                 {/* Image */}
                 <div className="relative aspect-[16/9] overflow-hidden bg-navy/30 shrink-0">
-                  <img
+                  <SafeImg
                     src={cs.image}
                     alt={cs.title}
                     className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"

@@ -213,6 +213,16 @@ async function main() {
   );
   console.log("✓ app/assessments/opengraph-image.png");
 
+  const fallbackSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+    <rect width="1200" height="675" fill="${NAVY}"/>
+    <circle cx="600" cy="300" r="90" fill="none" stroke="${GOLD}" stroke-width="1.5" opacity="0.25"/>
+    <circle cx="600" cy="300" r="130" fill="none" stroke="${GOLD}" stroke-width="1" opacity="0.15"/>
+    <rect x="450" y="420" width="300" height="2" fill="${GOLD}" opacity="0.45"/>
+  </svg>`;
+  await ensureDir(path.join(root, "public/images"));
+  await sharp(Buffer.from(fallbackSvg)).jpeg({ quality: 88 }).toFile(path.join(root, "public/images/article-fallback.jpg"));
+  console.log("✓ public/images/article-fallback.jpg");
+
   console.log("\nBrand assets generated successfully.");
 }
 

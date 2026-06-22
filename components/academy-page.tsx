@@ -36,7 +36,7 @@ function Nav({ onNotImplemented }: { onNotImplemented: (msg: string) => void }) 
       <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-20">
         <Link href="/" className="flex items-center gap-3">
           <Image
-            src="https://beingatfullpotential.com/wp-content/uploads/2019/11/Logo-light.png"
+            src="/wp-content/uploads/2019/11/Logo-light.png"
             alt="BEING at Full Potential"
             width={120}
             height={48}
@@ -110,7 +110,7 @@ function Footer() {
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-16 grid md:grid-cols-3 gap-12">
         <div>
           <Image
-            src="https://beingatfullpotential.com/wp-content/uploads/2019/11/Logo-light.png"
+            src="/wp-content/uploads/2019/11/Logo-light.png"
             alt="BEING at Full Potential"
             width={120}
             height={48}

@@ -31,7 +31,7 @@ function Nav() {
     <header className="fixed top-0 left-0 right-0 z-50 bg-navy/95 backdrop-blur-sm border-b border-white/10">
       <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-20">
         <Link href="/" className="flex items-center gap-3">
-          <Image src="https://beingatfullpotential.com/wp-content/uploads/2019/11/Logo-light.png"
+          <Image src="/wp-content/uploads/2019/11/Logo-light.png"
             alt="BEING at Full Potential" width={120} height={48} className="h-10 w-auto object-contain" />
         </Link>
         <nav className="hidden lg:flex items-center gap-8">
@@ -75,7 +75,7 @@ function Footer() {
     <footer className="bg-[#141210] border-t border-gold/15 pt-16 pb-10">
       <div className="max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
         <div>
-          <Image src="https://beingatfullpotential.com/wp-content/uploads/2019/11/Logo-light.png"
+          <Image src="/wp-content/uploads/2019/11/Logo-light.png"
             alt="BEING at Full Potential" width={110} height={44} className="h-9 w-auto object-contain mb-5" />
           <p className="font-body text-sm text-white/40 leading-relaxed max-w-xs">
             Partnering with transformation catalysts and change agents to deliver greater impact.

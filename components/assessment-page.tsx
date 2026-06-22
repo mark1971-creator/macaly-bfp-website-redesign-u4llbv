@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { SafeImg } from "@/components/safe-img";
 
 // ─── Toast ────────────────────────────────────────────────────────────────────
 function Toast({ message, onClose }: { message: string; onClose: () => void }) {
@@ -36,7 +37,7 @@ function Nav({ onNotImplemented }: { onNotImplemented: (msg: string) => void }) 
       <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-20">
         <Link href="/" className="flex items-center gap-3">
           <Image
-            src="https://beingatfullpotential.com/wp-content/uploads/2019/11/Logo-light.png"
+            src="/wp-content/uploads/2019/11/Logo-light.png"
             alt="BEING at Full Potential"
             width={120}
             height={48}
@@ -120,7 +121,7 @@ function Footer() {
       <div className="max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
         <div>
           <Image
-            src="https://beingatfullpotential.com/wp-content/uploads/2019/11/Logo-light.png"
+            src="/wp-content/uploads/2019/11/Logo-light.png"
             alt="BEING at Full Potential"
             width={110}
             height={44}
@@ -422,7 +423,7 @@ export default function AssessmentPage() {
 
                 {/* Framework image */}
                 <div className={`${tier.imageBg} border-b border-border px-8 pt-8 pb-6 flex items-center justify-center min-h-[260px] overflow-hidden`}>
-                  <img
+                  <SafeImg
                     src={tier.image}
                     alt={tier.imageAlt}
                     className="max-h-[220px] w-auto object-contain group-hover:scale-[1.03] transition-transform duration-700"

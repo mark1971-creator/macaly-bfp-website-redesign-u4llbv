@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { SafeImg } from "@/components/safe-img";
 
 // ─── Toast ─────────────────────────────────────────────────────────────────────
 function Toast({ message, onClose }: { message: string; onClose: () => void }) {
@@ -36,7 +37,7 @@ function Nav({ onNotImplemented }: { onNotImplemented: (msg: string) => void }) 
       <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-20">
         <Link href="/" className="flex items-center gap-3">
           <Image
-            src="https://beingatfullpotential.com/wp-content/uploads/2019/11/Logo-light.png"
+            src="/wp-content/uploads/2019/11/Logo-light.png"
             alt="BEING at Full Potential"
             width={120}
             height={48}
@@ -105,7 +106,7 @@ function Nav({ onNotImplemented }: { onNotImplemented: (msg: string) => void }) 
 
 // ─── Content data ──────────────────────────────────────────────────────────────
 const featuredArticle = {
-  image: "https://beingatfullpotential.com/wp-content/uploads/2026/04/Heading.png",
+  image: "/wp-content/uploads/2026/04/Heading.png",
   title: "Humanity's Inner Development: What the 2026 IDG Meta-Analysis Reveals",
   date: "April 9, 2026",
   excerpt:
@@ -116,7 +117,7 @@ const featuredArticle = {
 
 const articles = [
   {
-    image: "https://beingatfullpotential.com/wp-content/uploads/2023/08/q41ieu3p.png",
+    image: "/wp-content/uploads/2023/08/q41ieu3p.png",
     title: "Countering the threat of AI: Being fully HUMAN is the next competitive advantage",
     date: "August 25, 2023",
     tag: "Leadership",
@@ -125,7 +126,7 @@ const articles = [
     href: "/thoughtleadership/countering-the-threat-of-ai",
   },
   {
-    image: "https://beingatfullpotential.com/wp-content/uploads/2023/06/Maslow-Leadership-Diagram-Needs-at-Work-v5-1024x663-1.jpg",
+    image: "/wp-content/uploads/2023/06/Maslow-Leadership-Diagram-Needs-at-Work-v5-1024x663-1.jpg",
     title: "Improving Employee Experience through Workplace Actualization",
     date: "June 14, 2023",
     tag: "Organizations",
@@ -134,7 +135,7 @@ const articles = [
     href: "/thoughtleadership/improving-employee-experience",
   },
   {
-    image: "https://beingatfullpotential.com/wp-content/uploads/2023/01/1668418869806.png",
+    image: "/wp-content/uploads/2023/01/1668418869806.png",
     title: "Is our approach to Human Potential Development scientifically validated?",
     date: "January 23, 2023",
     tag: "Science",
@@ -164,25 +165,25 @@ const videos = [
 
 const books = [
   {
-    image: "https://beingatfullpotential.com/wp-content/uploads/2025/10/Untitled-design-8-665x1024.png",
+    image: "/wp-content/uploads/2025/10/Untitled-design-8-665x1024.png",
     title: "New Release 2025",
     author: "Mark Vandeneijnde",
     href: "https://www.amazon.com/dp/B0DYNQ1KVP",
   },
   {
-    image: "https://beingatfullpotential.com/wp-content/uploads/2020/09/Being_V1.jpg",
+    image: "/wp-content/uploads/2020/09/Being_V1.jpg",
     title: "The BEING Entrepreneur",
     author: "Mark Vandeneijnde",
     href: "https://www.amazon.com/BEING-Entrepreneur-Inside-Out-Approach-Entrepreneurship/dp/B08L9V448T/",
   },
   {
-    image: "https://beingatfullpotential.com/wp-content/uploads/2019/04/The_BEING_Leader_cover_EBOOK-1-1.jpg",
+    image: "/wp-content/uploads/2019/04/The_BEING_Leader_cover_EBOOK-1-1.jpg",
     title: "The BEING Leader",
     author: "Sujith Ravindran",
     href: "https://www.amazon.com/The-BEING-Leader-Tracing-Legendary/dp/0993721028/",
   },
   {
-    image: "https://beingatfullpotential.com/wp-content/uploads/2019/07/abundance.jpg",
+    image: "/wp-content/uploads/2019/07/abundance.jpg",
     title: "Mystical Laws of Abundance",
     author: "Sujith Ravindran",
     href: "https://www.amazon.com/Mystical-Laws-Abundance-Guide-Effortless-ebook/dp/B07FPW54V9/",
@@ -231,7 +232,7 @@ export default function InsightPage() {
       {/* ── HERO ───────────────────────────────────────────────────────────────── */}
       <section className="relative min-h-[60vh] flex items-end bg-navy overflow-hidden">
         {/* Nature background image */}
-        <img
+        <SafeImg
           src="https://images.pexels.com/photos/9348873/pexels-photo-9348873.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
           alt="Misty mountains at sunrise"
           className="absolute inset-0 w-full h-full object-cover object-center"
@@ -328,7 +329,7 @@ export default function InsightPage() {
                 className="group bg-white overflow-hidden hover:shadow-xl transition-all duration-500 hover:-translate-y-1 flex flex-col"
               >
                 <div className="aspect-[4/3] overflow-hidden bg-navy/5">
-                  <img
+                  <SafeImg
                     src={article.image}
                     alt={article.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
@@ -404,7 +405,7 @@ export default function InsightPage() {
                     />
                   ) : (
                     <>
-                      <img
+                      <SafeImg
                         src={`https://img.youtube.com/vi/${video.id}/hqdefault.jpg`}
                         alt={video.title}
                         className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -466,7 +467,7 @@ export default function InsightPage() {
             >
               <span className="inline-block font-body text-xs tracking-widest uppercase text-gold bg-gold/10 px-3 py-1 mb-4 self-start">Online · 6 Weeks</span>
               <div className="aspect-[3/1] overflow-hidden mb-4 bg-navy flex items-center justify-center">
-                <img
+                <SafeImg
                   src="https://innerdevelopmentgoals.org/wp-content/uploads/2024/11/IDG_Logo_Horizontal_Tag_BW_Neg-600x328.png"
                   alt="Inner Development Goals"
                   className="h-16 w-auto object-contain group-hover:scale-105 transition-transform duration-700"
@@ -489,7 +490,7 @@ export default function InsightPage() {
             >
               <span className="inline-block font-body text-xs tracking-widest uppercase text-gold bg-gold/10 px-3 py-1 mb-4 self-start">Online · ICF Approved</span>
               <div className="aspect-[3/1] overflow-hidden mb-4 bg-navy/5">
-                <img
+                <SafeImg
                   src="https://images.pexels.com/photos/5711372/pexels-photo-5711372.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
                   alt="Human Potential Coach Certification"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
@@ -615,7 +616,7 @@ export default function InsightPage() {
           <div className="grid md:grid-cols-3 gap-12 mb-12">
             <div>
               <Image
-                src="https://beingatfullpotential.com/wp-content/uploads/2019/11/Logo-light.png"
+                src="/wp-content/uploads/2019/11/Logo-light.png"
                 alt="BEING at Full Potential"
                 width={120}
                 height={48}
@@ -665,7 +666,7 @@ export default function InsightPage() {
                   className="block font-body text-sm text-white/60 hover:text-white transition-colors">
                   Twitter / X
                 </a>
-                <a href="http://www.linkedin.com/company/being-at-full-potential" target="_blank" rel="noopener noreferrer"
+                <a href="https://www.linkedin.com/company/being-at-full-potential" target="_blank" rel="noopener noreferrer"
                   className="block font-body text-sm text-white/60 hover:text-white transition-colors">
                   LinkedIn
                 </a>

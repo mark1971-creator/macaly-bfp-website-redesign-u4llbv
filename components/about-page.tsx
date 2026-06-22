@@ -36,7 +36,7 @@ function Nav({ onNotImplemented }: { onNotImplemented: (msg: string) => void }) 
       <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-20">
         <Link href="/" className="flex items-center gap-3">
           <Image
-            src="https://beingatfullpotential.com/wp-content/uploads/2019/11/Logo-light.png"
+            src="/wp-content/uploads/2019/11/Logo-light.png"
             alt="BEING at Full Potential"
             width={120}
             height={48}
@@ -191,25 +191,25 @@ const featuredTeam = [
   {
     name: "Mark Vandeneijnde",
     location: "Switzerland",
-    image: "https://beingatfullpotential.com/wp-content/uploads/2019/02/mark.jpg",
+    image: "/wp-content/uploads/2019/02/mark.jpg",
     bio: "Mark's keen sense of insight and market understanding were the source of many breakthrough initiatives during his 10-year corporate career. Co-founder of BEING at Full Potential.",
   },
   {
     name: "Peter Leong",
     location: "New Zealand",
-    image: "https://beingatfullpotential.com/wp-content/uploads/2021/08/Peter-150x150.jpg",
+    image: "/wp-content/uploads/2021/08/Peter-150x150.jpg",
     bio: "Facilitating transformational change in the field of organisational development, change management, integral leadership development, and full potential youth empowerment.",
   },
   {
     name: "Amrita Singh",
     location: "India",
-    image: "https://beingatfullpotential.com/wp-content/uploads/2025/02/amrita-singh-3-150x150.jpg",
+    image: "/wp-content/uploads/2025/02/amrita-singh-3-150x150.jpg",
     bio: "Amrita bears the unique ability to empathize, energize and encourage individuals. Her style of facilitation is empowering as she supports her audience to access their inner wisdom.",
   },
   {
     name: "Andrew Thornton",
     location: "United Kingdom",
-    image: "https://beingatfullpotential.com/wp-content/uploads/2021/08/andrew.jpg",
+    image: "/wp-content/uploads/2021/08/andrew.jpg",
     bio: "I believe that businesses run with a Heart deliver better results for all stakeholders — a happier, better place to work for employees, customers and communities.",
   },
 ];
@@ -334,7 +334,7 @@ export default function AboutPage() {
             <div className="relative order-2 lg:order-1">
               <div className="relative aspect-[3/2] overflow-hidden shadow-xl">
                 <Image
-                  src="https://beingatfullpotential.com/wp-content/uploads/2019/05/IMG-20180412-WA0011.jpg"
+                  src="/wp-content/uploads/2019/05/IMG-20180412-WA0011.jpg"
                   alt="BEING at Full Potential global community"
                   fill
                   className="object-cover object-center"
@@ -547,7 +547,7 @@ export default function AboutPage() {
 
         <div className="relative z-10 max-w-3xl mx-auto px-6 text-center">
           <Image
-            src="https://beingatfullpotential.com/wp-content/uploads/2019/11/Logo-light.png"
+            src="/wp-content/uploads/2019/11/Logo-light.png"
             alt="BEING at Full Potential"
             width={120}
             height={48}
@@ -584,7 +584,7 @@ export default function AboutPage() {
           <div className="grid md:grid-cols-3 gap-12 mb-12">
             <div>
               <Image
-                src="https://beingatfullpotential.com/wp-content/uploads/2019/11/Logo-light.png"
+                src="/wp-content/uploads/2019/11/Logo-light.png"
                 alt="BEING at Full Potential"
                 width={120}
                 height={48}
@@ -636,7 +636,7 @@ export default function AboutPage() {
                   className="block font-body text-sm text-white/60 hover:text-white transition-colors">
                   Twitter / X
                 </a>
-                <a href="http://www.linkedin.com/company/being-at-full-potential" target="_blank" rel="noopener noreferrer"
+                <a href="https://www.linkedin.com/company/being-at-full-potential" target="_blank" rel="noopener noreferrer"
                   className="block font-body text-sm text-white/60 hover:text-white transition-colors">
                   LinkedIn
                 </a>

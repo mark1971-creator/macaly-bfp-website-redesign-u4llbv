@@ -93,8 +93,37 @@ Brand assets ship with the repo:
 
 - `public/favicon.ico`, `public/icon.svg`
 - `public/brand/og-measure-what-matters.png` (1200×630 social preview)
+- `public/wp-content/uploads/…` — self-hosted legacy WordPress media (~100+ files)
 
 After changing brand visuals, run `npm run generate:brand` and commit the regenerated files.
+
+### WordPress image migration
+
+The new site replaced WordPress on the same domain, so old URLs like  
+`https://beingatfullpotential.com/wp-content/uploads/…` return **404**.
+
+**Fix applied:** images are self-hosted under `/wp-content/…` in `public/`.
+
+To refresh or fetch additional images from the Internet Archive:
+
+```bash
+npm run migrate:images
+```
+
+Some newer images (2024–2026) may not exist in the Wayback Machine. Missing images fall back to `/images/article-fallback.jpg` via the `SafeImg` component.
+
+---
+
+## SSL / “Not secure” in the browser
+
+If the address bar shows **Not secure** on `https://beingatfullpotential.com`:
+
+1. **Confirm the certificate** on your nginx server — use a valid Let's Encrypt (or commercial) cert for `beingatfullpotential.com` and `www.beingatfullpotential.com`.
+2. **Force HTTPS** — HTTP should 301 redirect to HTTPS (already configured on nginx).
+3. **Mixed content** — ensure no `http://` asset URLs remain (site code uses HTTPS or relative paths).
+4. **Hard-refresh** the browser after deploy (`Ctrl+Shift+R`) to clear cached broken responses.
+
+The Next.js app sends a `Strict-Transport-Security` header after deploy.
 
 ---
 

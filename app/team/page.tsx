@@ -19,7 +19,7 @@ export const metadata: Metadata = {
       "Say hello to some of the most remarkable humans on earth. Our global community of coaches and change agents ready to support your journey.",
     images: [
       {
-        url: "https://beingatfullpotential.com/wp-content/uploads/2019/05/IMG-20180412-WA0011.jpg",
+        url: "/wp-content/uploads/2019/05/IMG-20180412-WA0011.jpg",
         width: 1200,
         height: 630,
       },

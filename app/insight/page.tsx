@@ -20,7 +20,7 @@ export const metadata: Metadata = {
       "Access new horizons. We relentlessly challenge existing beliefs about success, performance, happiness and the constructs that limit meaningful change.",
     images: [
       {
-        url: "https://beingatfullpotential.com/wp-content/uploads/2026/04/Heading.png",
+        url: "/wp-content/uploads/2026/04/Heading.png",
         width: 1200,
         height: 630,
       },

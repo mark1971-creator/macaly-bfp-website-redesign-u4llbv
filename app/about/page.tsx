@@ -20,7 +20,7 @@ export const metadata: Metadata = {
       "A global community of 130+ coaches and change agents dedicated to a world where every individual and organization fully realizes their Human Potential.",
     images: [
       {
-        url: "https://beingatfullpotential.com/wp-content/uploads/2019/04/imageedit_28_7440058950-1.png",
+        url: "/wp-content/uploads/2019/04/imageedit_28_7440058950-1.png",
         width: 1200,
         height: 630,
       },
