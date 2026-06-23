@@ -44,7 +44,10 @@ const nextConfig = {
   },
   devIndicators: false,
   async redirects() {
-    return activeRedirects();
+    return [
+      ...activeRedirects(),
+      { source: "/contact/", destination: "/#contact", permanent: false },
+    ];
   },
   async headers() {
     return [
