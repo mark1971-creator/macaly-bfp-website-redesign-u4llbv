@@ -160,25 +160,25 @@ const videos = [
 
 const books = [
   {
-    image: "/wp-content/uploads/2025/10/Untitled-design-8-665x1024.png",
-    title: "New Release 2025",
-    author: "Mark Vandeneijnde",
+    image: "/images/books/coming-home-to-who-you-are.jpg",
+    title: "Coming Home to Who You Are",
+    author: "Mark Vandeneijnde & M. Aurelius Higgs",
     href: "https://www.amazon.com/dp/B0DYNQ1KVP",
   },
   {
-    image: "/wp-content/uploads/2020/09/Being_V1.jpg",
+    image: "/images/books/being-entrepreneur.jpg",
     title: "The BEING Entrepreneur",
     author: "Mark Vandeneijnde",
     href: "https://www.amazon.com/BEING-Entrepreneur-Inside-Out-Approach-Entrepreneurship/dp/B08L9V448T/",
   },
   {
-    image: "/wp-content/uploads/2019/04/The_BEING_Leader_cover_EBOOK-1-1.jpg",
+    image: "/images/books/being-leader.jpg",
     title: "The BEING Leader",
     author: "Sujith Ravindran",
     href: "https://www.amazon.com/The-BEING-Leader-Tracing-Legendary/dp/0993721028/",
   },
   {
-    image: "/wp-content/uploads/2019/07/abundance.jpg",
+    image: "/images/books/mystical-laws-abundance.jpg",
     title: "Mystical Laws of Abundance",
     author: "Sujith Ravindran",
     href: "https://www.amazon.com/Mystical-Laws-Abundance-Guide-Effortless-ebook/dp/B07FPW54V9/",

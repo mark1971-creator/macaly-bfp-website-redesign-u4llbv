@@ -61,7 +61,39 @@ function decorativeRingsSvg(width, height) {
   return rings.join("\n  ");
 }
 
-function ogOverlaySvg(width, height) {
+function ogSiteSvg(width, height) {
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="${NAVY}" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#162550" stop-opacity="1"/>
+    </linearGradient>
+  </defs>
+  <rect width="${width}" height="${height}" fill="url(#bg)"/>
+  <rect x="0" y="0" width="${width}" height="${Math.round(height * 0.005)}" fill="${GOLD}" opacity="0.5"/>
+  <rect x="0" y="${height - Math.round(height * 0.005)}" width="${width}" height="${Math.round(height * 0.005)}" fill="${GOLD}" opacity="0.3"/>
+
+  <circle cx="${Math.round(width * 0.833)}" cy="${Math.round(height * 0.317)}" r="${Math.round(height * 0.476)}" fill="none" stroke="${GOLD}" stroke-width="1.2" opacity="0.1"/>
+  <circle cx="${Math.round(width * 0.833)}" cy="${Math.round(height * 0.317)}" r="${Math.round(height * 0.349)}" fill="none" stroke="${GOLD}" stroke-width="1" opacity="0.08"/>
+  <circle cx="${Math.round(width * 0.833)}" cy="${Math.round(height * 0.317)}" r="${Math.round(height * 0.222)}" fill="none" stroke="${GOLD}" stroke-width="0.8" opacity="0.06"/>
+  <circle cx="${Math.round(width * 0.167)}" cy="${Math.round(height * 0.873)}" r="${Math.round(height * 0.286)}" fill="none" stroke="${GOLD}" stroke-width="0.6" opacity="0.06"/>
+
+  <rect x="${Math.round(width * 0.08)}" y="${Math.round(height * 0.27)}" width="60" height="3" rx="1.5" fill="${GOLD}" opacity="0.7"/>
+  <text x="${Math.round(width * 0.08)}" y="${Math.round(height * 0.341)}" fill="${GOLD}" font-family="Georgia, 'Times New Roman', serif" font-size="${Math.round(height * 0.035)}" letter-spacing="6" font-weight="400" opacity="0.9">BEING AT FULL POTENTIAL</text>
+
+  <text x="${Math.round(width * 0.08)}" y="${Math.round(height * 0.476)}" fill="${WHITE}" font-family="Georgia, 'Times New Roman', serif" font-size="${Math.round(height * 0.121)}" font-weight="300">Realize Your</text>
+  <text x="${Math.round(width * 0.08)}" y="${Math.round(height * 0.611)}" fill="${GOLD}" font-family="Georgia, 'Times New Roman', serif" font-size="${Math.round(height * 0.121)}" font-weight="300" font-style="italic">Full Potential</text>
+
+  <text x="${Math.round(width * 0.08)}" y="${Math.round(height * 0.698)}" fill="${WHITE}" fill-opacity="0.6" font-family="Arial, Helvetica, sans-serif" font-size="${Math.round(height * 0.035)}" font-weight="400">Leadership. Innovation. Transformation.</text>
+
+  <rect x="${Math.round(width * 0.08)}" y="${Math.round(height * 0.762)}" width="180" height="42" rx="21" fill="none" stroke="${GOLD}" stroke-width="1.2" opacity="0.6"/>
+  <text x="${Math.round(width * 0.08 + 44)}" y="${Math.round(height * 0.762 + 27)}" fill="${GOLD}" font-family="Arial, Helvetica, sans-serif" font-size="15" letter-spacing="1.5" opacity="0.8">EXPLORE</text>
+
+  <text x="${Math.round(width * 0.08)}" y="${Math.round(height * 0.905)}" fill="${WHITE}" fill-opacity="0.35" font-family="Arial, Helvetica, sans-serif" font-size="${Math.round(height * 0.025)}" letter-spacing="3">beingatfullpotential.com</text>
+</svg>`;
+}
+
+function ogAssessmentOverlaySvg(width, height) {
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
   <defs>
     <linearGradient id="overlay" x1="0" y1="0" x2="1" y2="1">
@@ -74,10 +106,6 @@ function ogOverlaySvg(width, height) {
       <stop offset="50%" stop-color="${GOLD}" stop-opacity="0.55"/>
       <stop offset="100%" stop-color="${GOLD}" stop-opacity="0"/>
     </linearGradient>
-    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="2" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
   </defs>
   <rect width="${width}" height="${height}" fill="url(#overlay)"/>
   <rect x="0" y="0" width="${width}" height="3" fill="url(#goldLine)"/>
@@ -142,14 +170,20 @@ async function fetchBuffer(url) {
   return Buffer.from(await res.arrayBuffer());
 }
 
-async function generateOgImage(width, height, outPath) {
+async function generateSiteOgImage(width, height, outPath) {
+  const svg = Buffer.from(ogSiteSvg(width, height));
+  await ensureDir(path.dirname(outPath));
+  await sharp(svg).png({ compressionLevel: 9 }).toFile(outPath);
+}
+
+async function generateAssessmentOgImage(width, height, outPath) {
   const hero = await fetchBuffer(HERO_IMAGE);
   const base = await sharp(hero)
     .resize(width, height, { fit: "cover", position: "center" })
     .jpeg({ quality: 92 })
     .toBuffer();
 
-  const overlay = Buffer.from(ogOverlaySvg(width, height));
+  const overlay = Buffer.from(ogAssessmentOverlaySvg(width, height));
   const overlayPng = await sharp(overlay).png().toBuffer();
 
   await ensureDir(path.dirname(outPath));
@@ -195,17 +229,20 @@ async function main() {
     console.log(`✓ ${rel}`);
   }
 
-  await generateOgImage(1200, 630, path.join(root, "public/brand/og-measure-what-matters.png"));
-  console.log("✓ public/brand/og-measure-what-matters.png (1200×630)");
+  await generateSiteOgImage(1200, 630, path.join(root, "public/brand/og-realize-your-full-potential.png"));
+  console.log("✓ public/brand/og-realize-your-full-potential.png (1200×630)");
 
-  await generateOgImage(2400, 1260, path.join(root, "public/brand/og-measure-what-matters@2x.png"));
-  console.log("✓ public/brand/og-measure-what-matters@2x.png (2400×1260)");
+  await generateSiteOgImage(2400, 1260, path.join(root, "public/brand/og-realize-your-full-potential@2x.png"));
+  console.log("✓ public/brand/og-realize-your-full-potential@2x.png (2400×1260)");
 
   await fs.promises.copyFile(
-    path.join(root, "public/brand/og-measure-what-matters.png"),
+    path.join(root, "public/brand/og-realize-your-full-potential.png"),
     path.join(root, "app/opengraph-image.png")
   );
   console.log("✓ app/opengraph-image.png");
+
+  await generateAssessmentOgImage(1200, 630, path.join(root, "public/brand/og-measure-what-matters.png"));
+  console.log("✓ public/brand/og-measure-what-matters.png (1200×630)");
 
   await fs.promises.copyFile(
     path.join(root, "public/brand/og-measure-what-matters.png"),
