@@ -229,7 +229,7 @@ const heroSlides = [
     subtitle: "A Siam Computing & Being at Full Potential Partnership — IDG Measurement & Alignment.",
     cta: { label: "Read More", href: "/case-studies/siam-computing" },
     bg: "from-[#0d1b3e] via-[#1e3a6e] to-[#0d1b3e]",
-    bgImage: "https://images.pexels.com/photos/32159928/pexels-photo-32159928.png?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    bgImage: "/images/hero/slide-1.jpg",
   },
   {
     eyebrow: "The World Needs You",
@@ -237,7 +237,7 @@ const heroSlides = [
     subtitle: "We believe this is a basic human right. Access our platform for Human Potential Development — free and available to all.",
     cta: { label: "Unlock Your Potential", href: "https://beingatfullpotential.io/" },
     bg: "from-[#1a2f1a] via-[#1e3a2e] to-[#0d1b3e]",
-    bgImage: "https://images.pexels.com/photos/9665186/pexels-photo-9665186.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    bgImage: "/images/hero/slide-2.jpg",
   },
   {
     eyebrow: "Academy",
@@ -245,7 +245,7 @@ const heroSlides = [
     subtitle: "This certification equips you with leading-edge Human Potential tools so you can help clients discover the transformational leader within.",
     cta: { label: "More Information", href: "/academy" },
     bg: "from-[#2e1a0e] via-[#3d2510] to-[#0d1b3e]",
-    bgImage: "https://images.pexels.com/photos/5646319/pexels-photo-5646319.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    bgImage: "/images/hero/slide-3.jpg",
   },
 ];
 
@@ -415,7 +415,7 @@ function VisionSection({ onNotImplemented }: { onNotImplemented: (msg: string) =
 // ─── Thought Leadership Section ────────────────────────────────────────────────
 const articles = [
   {
-    image: "https://images.pexels.com/photos/17485657/pexels-photo-17485657.png?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    image: "/images/hero/trusted-1.jpg",
     title: "Is our approach to Human Potential Development scientifically validated?",
     date: "January 23, 2023",
     excerpt:
@@ -423,7 +423,7 @@ const articles = [
     href: "/thoughtleadership/human-potential-model-validation",
   },
   {
-    image: "https://images.pexels.com/photos/12489156/pexels-photo-12489156.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    image: "/images/hero/trusted-2.jpg",
     title: "Countering the threat of AI: Being fully HUMAN is the next competitive advantage",
     date: "August 25, 2023",
     excerpt:
@@ -431,7 +431,7 @@ const articles = [
     href: "/thoughtleadership/countering-the-threat-of-ai",
   },
   {
-    image: "https://images.pexels.com/photos/14692664/pexels-photo-14692664.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    image: "/images/hero/trusted-3.jpg",
     title: "Improving Employee Experience through Workplace Actualization",
     date: "June 14, 2023",
     excerpt:
@@ -792,7 +792,7 @@ function AcademySection({ onNotImplemented }: { onNotImplemented: (msg: string) 
             <span className="inline-block font-body text-xs tracking-widest uppercase text-gold bg-gold/10 px-3 py-1 mb-4">Online • ICF Approved</span>
             <div className="aspect-[3/1] overflow-hidden mb-4 bg-navy/5">
               <SafeImg
-                src="https://images.pexels.com/photos/5711372/pexels-photo-5711372.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                src="/images/hero/impact.jpg"
                 alt="Human Potential Coach Certification"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
@@ -830,7 +830,7 @@ function StandardsSection({ onNotImplemented }: { onNotImplemented: (msg: string
       <div
         className="absolute inset-0 bg-cover bg-center bg-fixed"
         style={{
-          backgroundImage: `url('https://images.pexels.com/photos/29347337/pexels-photo-29347337.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940')`,
+          backgroundImage: `url('/images/hero/hero-bg.jpg')`,
         }}
       />
       <div className="absolute inset-0 bg-navy/80" />
