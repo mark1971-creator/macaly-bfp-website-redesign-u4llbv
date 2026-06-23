@@ -39,7 +39,12 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  images: { unoptimized: true },
+  images: {
+    formats: ["image/avif", "image/webp"],
+    remotePatterns: [
+      { protocol: "https", hostname: "images.pexels.com" },
+    ],
+  },
   devIndicators: false,
   async redirects() {
     return activeRedirects();
