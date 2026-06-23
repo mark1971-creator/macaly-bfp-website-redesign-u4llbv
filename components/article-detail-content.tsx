@@ -486,7 +486,30 @@ export default function ArticleDetailContent({
   backHref: string;
   backLabel: string;
 }) {
-  const contentBlocks = article.blocks;
+  // For case studies, extract intro paragraphs (before first h2) and skip redundant "Case Study" heading
+  let contentBlocks = article.blocks;
+  let caseStudyIntro: string[] = [];
+
+  if (article.type === "case-study") {
+    const firstHeadingIdx = article.blocks.findIndex(b => b.type === "heading" && b.level === 2);
+    const afterFirstHeading = firstHeadingIdx >= 0 ? firstHeadingIdx + 1 : 0;
+
+    // Collect paragraphs between first h2 and second h2
+    for (let i = afterFirstHeading; i < article.blocks.length; i++) {
+      const block = article.blocks[i];
+      if (block.type === "heading" && block.level === 2) break;
+      if (block.type === "paragraph") {
+        caseStudyIntro.push((block as any).text);
+      }
+    }
+
+    // Skip the first "Case Study" h2 heading and initial intro paragraphs
+    contentBlocks = article.blocks.filter((block, idx) => {
+      if (block.type === "heading" && block.level === 2 && (block as any).text === "Case Study") return false;
+      if (block.type === "paragraph" && idx < (firstHeadingIdx + 1 + caseStudyIntro.length)) return false;
+      return true;
+    });
+  }
 
   const formattedDate = article.date
     ? new Date(article.date).toLocaleDateString("en-GB", {
@@ -563,6 +586,21 @@ export default function ArticleDetailContent({
             />
           </div>
         </div>
+      )}
+
+      {/* ── CASE STUDY INTRO ─────────────────────────────────────────────── */}
+      {article.type === "case-study" && caseStudyIntro.length > 0 && (
+        <section className="bg-gradient-to-b from-white to-background py-12 lg:py-16">
+          <div className="max-w-3xl mx-auto px-6 lg:px-12">
+            <div className="border-l-4 border-gold pl-6 space-y-4">
+              {caseStudyIntro.map((text, i) => (
+                <p key={i} className="font-display text-lg lg:text-2xl font-light text-navy leading-relaxed">
+                  {text}
+                </p>
+              ))}
+            </div>
+          </div>
+        </section>
       )}
 
       {/* ── ARTICLE BODY ─────────────────────────────────────────────────── */}
