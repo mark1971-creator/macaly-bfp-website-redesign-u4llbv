@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useFormSpamFields } from "@/components/form-spam-fields";
 
 // ─── Toast ────────────────────────────────────────────────────────────────────
 function Toast({ message, onClose }: { message: string; onClose: () => void }) {
@@ -125,6 +126,7 @@ function ApplicationForm() {
     heardFrom: "",
   });
   const [status, setStatus] = useState<FormState>("idle");
+  const { spamFields, SpamFields } = useFormSpamFields();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -149,6 +151,7 @@ function ApplicationForm() {
           coachingBackground: form.coachingBackground,
           motivation: form.motivation,
           heardFrom: form.heardFrom,
+          ...spamFields,
         }),
       });
 
@@ -201,7 +204,8 @@ function ApplicationForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white border border-border p-8 lg:p-10 space-y-6">
+    <form onSubmit={handleSubmit} className="relative bg-white border border-border p-8 lg:p-10 space-y-6">
+      <SpamFields />
       {/* Name row */}
       <div className="grid sm:grid-cols-2 gap-5">
         <div>
@@ -355,7 +359,7 @@ export default function AcademyApplyPage() {
           <p className="font-body text-[10px] tracking-[0.3em] text-gold uppercase mb-5">ICF Approved · 25 CCEUs</p>
           <h1 className="font-display text-5xl md:text-6xl font-light text-white leading-[1.05] max-w-3xl mb-5">
             Human Potential Coach<br />
-            <span className="text-gold italic">Certification Training</span>
+            <span className="text-gold">Certification Training</span>
           </h1>
           <p className="font-body text-base text-white/55 max-w-xl leading-relaxed">
             Apply for the October – December 2026 cohort. Places are limited — we review every application personally.

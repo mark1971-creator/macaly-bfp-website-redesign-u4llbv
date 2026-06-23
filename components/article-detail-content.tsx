@@ -153,12 +153,12 @@ function SkillGridBlock({
               />
             </div>
           ) : (
-            <div className="w-full aspect-[4/3] overflow-hidden rounded-sm">
+            <div className="w-full aspect-[4/3] overflow-hidden rounded-sm bg-white flex items-center justify-center p-2">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <SafeImg
                 src={item.image}
                 alt={item.name}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
               />
             </div>
           )}
@@ -281,18 +281,44 @@ function RenderBlock({ block, index }: { block: Block; index: number }) {
       6: "font-body text-sm font-semibold uppercase tracking-wider text-gold mt-4 mb-2",
     };
 
-    // Detect numbered headings: "1. Title Text" or "2. Something"
+    // Detect numbered headings: "1. Title Text" or lettered "a. Subsection"
     const numberedMatch = block.text.match(/^(\d+)\.\s+(.+)$/);
+    const letteredMatch = block.text.match(/^([a-z])\.\s+(.+)$/i);
+    const romanMatch = block.text.match(/^([ivx]+)\.\s+(.+)$/i);
+
     if (numberedMatch) {
       const [, num, title] = numberedMatch;
       const cleanTitle = autoTitle(title);
-      const isLarge = block.level <= 1;
+      const isLarge = block.level <= 2;
+      const isCompact = block.level >= 4;
+      const numSize = isLarge
+        ? "text-3xl md:text-4xl"
+        : isCompact
+          ? "text-lg"
+          : "text-xl md:text-2xl";
       return (
-        <div className={`flex items-start gap-5 ${isLarge ? "mt-10 mb-5" : "mt-8 mb-4"}`}>
-          <span className={`shrink-0 font-display text-gold leading-none ${isLarge ? "text-4xl pt-0.5" : "text-2xl pt-1"}`}>
-            {num.padStart(2, "0")}
+        <div className={`flex items-baseline gap-4 ${isLarge ? "mt-10 mb-5" : "mt-8 mb-4"}`}>
+          <span className={`shrink-0 font-display text-gold leading-none tabular-nums ${numSize}`}>
+            {num}
           </span>
-          <Tag className={`${sizeMap[block.level] || sizeMap[2]} mt-0 mb-0`}>
+          <Tag className={`${sizeMap[block.level] || sizeMap[2]} mt-0 mb-0 flex-1 min-w-0`}>
+            {cleanTitle}
+          </Tag>
+        </div>
+      );
+    }
+
+    if (letteredMatch || romanMatch) {
+      const match = letteredMatch || romanMatch!;
+      const marker = match[1];
+      const title = match[2];
+      const cleanTitle = autoTitle(title);
+      return (
+        <div className="flex items-baseline gap-3 mt-6 mb-3">
+          <span className="shrink-0 font-display text-gold text-lg leading-none w-6 text-right">
+            {marker.toLowerCase()}.
+          </span>
+          <Tag className={`${sizeMap[block.level] || sizeMap[3]} mt-0 mb-0 flex-1 min-w-0`}>
             {cleanTitle}
           </Tag>
         </div>
@@ -365,13 +391,25 @@ function RenderBlock({ block, index }: { block: Block; index: number }) {
   }
 
   if (block.type === "image" && block.src) {
+    const isAppScreenshot = block.src.includes("/case-studies/siam/");
+    const isSiamComposite =
+      block.src.includes("/siam-computing/inline-08") ||
+      block.src.includes("/siam-computing/inline-09");
+    const isArticleDiagram = block.src.startsWith("/images/articles/");
+    const useContain = isAppScreenshot || isSiamComposite || isArticleDiagram;
     return (
-      <figure className="my-8">
+      <figure
+        className={`my-8 ${useContain ? "bg-white p-2 md:p-4 rounded-sm" : ""}`}
+      >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <SafeImg
           src={block.src}
           alt={block.alt || ""}
-          className="w-full rounded-sm object-cover"
+          className={
+            useContain
+              ? "w-full object-contain max-h-[720px] mx-auto"
+              : "w-full rounded-sm object-cover"
+          }
           onError={(e) => {
             const fig = e.currentTarget.closest("figure") as HTMLElement | null;
             if (fig) fig.style.display = "none";

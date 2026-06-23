@@ -153,7 +153,7 @@ const caseStudies = [
     sector: "Retail · London, UK",
     summary: "After sales declined -7% in 2014, invested in developing human potential throughout the organisation. Coaching unlocked creativity at every level, driving a full business turnaround.",
     results: ["-7% → +5% like-for-like sales turnaround", "+55% average employee service length", "64% Human Potential score (8pts above benchmark)", "+1.5pts gross margin improvement"],
-    href: "/case-studies/thorntons-budgens",
+    href: "/case-studies/business-case-human-potential-realisation",
   },
 ];
 
@@ -207,10 +207,6 @@ export default function OrganizationsPage() {
           </div>
         </div>
 
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40">
-          <div className="w-px h-12 bg-white/40" />
-          <span className="font-body text-[9px] tracking-[0.3em] text-white/60 uppercase">Scroll</span>
-        </div>
       </section>
 
       {/* ── THE ICEBERG ──────────────────────────────────────────────────────── */}

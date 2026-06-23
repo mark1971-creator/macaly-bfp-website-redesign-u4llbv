@@ -210,10 +210,6 @@ export default function TeamsPage() {
           </div>
         </div>
 
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40">
-          <div className="w-px h-12 bg-white/40" />
-          <span className="font-body text-[9px] tracking-[0.3em] text-white/60 uppercase">Scroll</span>
-        </div>
       </section>
 
       {/* ── THE CHALLENGE ────────────────────────────────────────────────────── */}

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useFormSpamFields } from "@/components/form-spam-fields";
 
 // ─── Toast ────────────────────────────────────────────────────────────────────
 function Toast({ message, onClose }: { message: string; onClose: () => void }) {
@@ -123,6 +124,7 @@ function RegistrationForm() {
     interest: "",
   });
   const [status, setStatus] = useState<FormState>("idle");
+  const { spamFields, SpamFields } = useFormSpamFields();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -144,6 +146,7 @@ function RegistrationForm() {
           country: form.country,
           interest: form.interest,
           invoicing: form.invoicing,
+          ...spamFields,
         }),
       });
       if (!res.ok) throw new Error("Send failed");
@@ -196,7 +199,8 @@ function RegistrationForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white border border-border p-8 lg:p-10 space-y-6">
+    <form onSubmit={handleSubmit} className="relative bg-white border border-border p-8 lg:p-10 space-y-6">
+      <SpamFields />
       {/* Interest */}
       <div>
         <label className="font-body text-[10px] tracking-[0.2em] text-foreground/50 uppercase block mb-2">I would like to register *</label>
@@ -328,7 +332,7 @@ export default function IDGCertificationPage() {
           <p className="font-body text-[10px] tracking-[0.3em] text-gold uppercase mb-5">Online · 6 Weeks</p>
           <h1 className="font-display text-5xl md:text-6xl font-light text-white leading-[1.05] max-w-3xl mb-5">
             6-Week IDG Coach<br />
-            <span className="text-gold italic">Certification Training</span>
+            <span className="text-gold">Certification Training</span>
           </h1>
           <p className="font-body text-base text-white/55 max-w-xl leading-relaxed">
             Equip yourself with the IDG Measurement Tool and coaching modalities to open new doorways in organisations, support leaders on their inner development journey, and quantify your impact in the context of advancing the 17 SDGs.

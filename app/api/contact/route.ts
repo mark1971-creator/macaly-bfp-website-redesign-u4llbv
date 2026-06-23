@@ -1,4 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
+import {
+  checkSubmissionSpam,
+  getClientIp,
+  stripSpamFields,
+} from "@/lib/form-spam-guard";
 
 export async function POST(req: NextRequest) {
   const BREVO_API_KEY = process.env.BREVO_API_KEY;
@@ -11,8 +16,15 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const body = await req.json();
-  const { type, ...fields } = body;
+  const body = (await req.json()) as Record<string, unknown>;
+  const spam = checkSubmissionSpam(body, getClientIp(req));
+
+  if (spam !== "ok") {
+    console.warn("Contact form blocked:", spam);
+    return NextResponse.json({ success: true });
+  }
+
+  const { type, ...fields } = stripSpamFields(body);
 
   const rows = Object.entries(fields)
     .map(([key, value]) => {
@@ -27,7 +39,8 @@ export async function POST(req: NextRequest) {
     idg: "New IDG Certification Registration — BEING at Full Potential",
   };
 
-  const subject = subjectMap[type] ?? "New Form Submission — BEING at Full Potential";
+  const formType = typeof type === "string" ? type : "contact";
+  const subject = subjectMap[formType] ?? "New Form Submission — BEING at Full Potential";
 
   const htmlContent = `
     <div style="font-family:'Lato',Arial,sans-serif;max-width:600px;margin:0 auto;background:#fff;border:1px solid #e8e4dc;padding:32px;">
@@ -39,10 +52,12 @@ export async function POST(req: NextRequest) {
     </div>
   `;
 
+  const email = typeof fields.email === "string" ? fields.email : undefined;
+
   const payload = {
     sender: { name: "BEING at Full Potential Website", email: "mark@beingatfullpotential.com" },
     to: [{ email: "mark@beingatfullpotential.com", name: "Mark Vandeneijnde" }],
-    replyTo: fields.email ? { email: fields.email as string } : undefined,
+    replyTo: email ? { email } : undefined,
     subject,
     htmlContent,
   };
@@ -63,7 +78,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Failed to send email" }, { status: 500 });
     }
 
-    console.log("Contact email sent successfully via Brevo, type:", type);
+    console.log("Contact email sent successfully via Brevo, type:", formType);
     return NextResponse.json({ success: true });
   } catch (err) {
     console.error("Contact API error:", err);

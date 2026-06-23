@@ -19,7 +19,10 @@ This is a **Next.js App Router** application. Most pages are **statically genera
              │                       │
              ▼                       ▼
      lib/article-content.json   Brevo API
-     (59 articles + 3 cases)    (email + contacts)
+     (35 articles + 3 cases)    (email + contacts)
+             │
+             ├── lib/article-redirects.json (189 legacy redirects)
+             └── lib/article-metadata.ts (OG/Twitter per article)
              │
              ▼
      External image CDNs
@@ -54,15 +57,25 @@ components/                   # Page-level and shared UI
 └── ui/                       # shadcn/Radix primitives
 
 lib/
-├── article-content.json      # All article + case study body content (~600KB)
+├── article-content.json      # All article + case study body content
+├── article-redirects.json    # Legacy WordPress URL redirects (189 rules)
+├── article-metadata.ts       # Open Graph / Twitter metadata builder
+├── articles.ts               # Card/list helpers for insight & archive pages
+├── form-spam-guard.ts        # Server-side honeypot, timing, rate-limit checks
 └── utils.ts                  # cn() helper
 
 public/
 ├── brand/                    # High-res favicon + OG image sources
+├── images/articles/          # Self-hosted article images
+├── images/case-studies/      # Case study screenshots
+├── images/clients/           # Client logos
+├── wp-content/uploads/       # Self-hosted legacy WordPress media
 ├── favicon.ico               # Browser fallback favicon
 └── icon.svg                  # SVG favicon
 
 scripts/
+├── fix-article-redirects.mjs # Runs at build — syncs redirect JSON
+├── generate-legacy-redirects.mjs
 └── generate-brand-assets.mjs # Regenerate favicon + OG PNGs
 
 convex/                       # Optional backend (auth scaffolding)
@@ -75,7 +88,7 @@ convex/                       # Optional backend (auth scaffolding)
 | Route type | Strategy | Notes |
 |------------|----------|-------|
 | Marketing pages (`/about`, `/impact`, …) | Static (`○`) | Built at compile time |
-| `/thoughtleadership/[slug]` | SSG (`●`) | `generateStaticParams()` from JSON |
+| `/thoughtleadership/[slug]` | SSG (`●`) | `generateStaticParams()` from JSON (35 articles) |
 | `/case-studies/[slug]` | SSG (`●`) | 3 case studies from JSON |
 | `/api/*` | Dynamic (`ƒ`) | Server-only, uses env secrets |
 
@@ -144,7 +157,7 @@ Convex files exist for future auth/admin features (`convex/auth.ts`, `ResendOTP.
 
 | File | Purpose |
 |------|---------|
-| `next.config.js` | Webpack/turbopack, macaly-tagger (dev), unoptimized images |
+| `next.config.js` | Webpack/turbopack, macaly-tagger (dev), unoptimized images, legacy redirects |
 | `tailwind.config.ts` | Brand color tokens mapped to CSS variables |
 | `components.json` | shadcn/ui configuration |
 | `tsconfig.json` | Path alias `@/*` → project root |

@@ -1,3 +1,34 @@
+const articleRedirects = require("./lib/article-redirects.json");
+const articleContent = require("./lib/article-content.json");
+
+const publishedArticleSlugs = new Set(
+  Object.entries(articleContent)
+    .filter(([, entry]) => entry.type === "article")
+    .map(([slug]) => slug)
+);
+
+const publishedCaseSlugs = new Set(
+  Object.entries(articleContent)
+    .filter(([, entry]) => entry.type === "case-study")
+    .map(([slug]) => slug)
+);
+
+/** Never send live articles/case studies to the home page — overrides stale redirect JSON. */
+function activeRedirects() {
+  return articleRedirects.filter((redirect) => {
+    if (redirect.source === redirect.destination) return false;
+    const thoughtMatch = redirect.source.match(/^\/thoughtleadership\/(.+)$/);
+    if (thoughtMatch && redirect.destination === "/" && publishedArticleSlugs.has(thoughtMatch[1])) {
+      return false;
+    }
+    const caseMatch = redirect.source.match(/^\/case-studies\/(.+)$/);
+    if (caseMatch && redirect.destination === "/" && publishedCaseSlugs.has(caseMatch[1])) {
+      return false;
+    }
+    return true;
+  });
+}
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
@@ -10,6 +41,9 @@ const nextConfig = {
   },
   images: { unoptimized: true },
   devIndicators: false,
+  async redirects() {
+    return activeRedirects();
+  },
   async headers() {
     return [
       {

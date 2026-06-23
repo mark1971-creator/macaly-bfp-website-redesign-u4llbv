@@ -411,9 +411,9 @@ export default function TeamPage() {
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 pb-16 pt-36">
           <p className="font-body text-xs tracking-[0.3em] text-gold mb-5 uppercase">Our People</p>
           <h1 className="font-display text-5xl md:text-7xl font-light text-white leading-[1.05] max-w-3xl mb-5">
-            Human Potential <span className="text-gold italic">Coaches</span>
+            Human Potential <span className="text-gold">Coaches</span>
           </h1>
-          <p className="font-display text-xl md:text-2xl text-white/60 italic font-light max-w-2xl">
+          <p className="font-display text-xl md:text-2xl text-white/60 font-light max-w-2xl">
             A global community across four continents — say hello to some of the most remarkable humans on earth.
           </p>
         </div>

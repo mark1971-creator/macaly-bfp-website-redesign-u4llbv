@@ -28,7 +28,7 @@ Dev server runs at [http://localhost:3000](http://localhost:3000) (or next avail
 | Script | Description |
 |--------|-------------|
 | `npm run dev` | Development server with webpack (`next dev --webpack`) |
-| `npm run build` | Production build — run before deploy |
+| `npm run build` | Regenerates legacy redirects, then production Next.js build |
 | `npm run start` | Serve production build locally |
 | `npm run lint` | ESLint via `next lint` |
 | `npm run test` | Vitest in watch mode |
@@ -140,14 +140,15 @@ Edit overlay in `scripts/generate-brand-assets.mjs`, run `npm run generate:brand
 
 ## Build output
 
-After `npm run build`, expect ~80 static pages:
+After `npm run build`, expect ~61 static pages:
 
 - 16 marketing routes
-- 59 article pages
+- 35 article pages
 - 3 case study pages
 - API routes (dynamic)
+- Icon/OG assets
 
-Verify the route table printed at the end of the build log.
+The build log prints `Redirects: N -> N` when redirect sync runs, then the full route table.
 
 ---
 

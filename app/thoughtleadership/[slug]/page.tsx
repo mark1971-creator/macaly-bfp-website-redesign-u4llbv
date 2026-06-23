@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import articleContent from "@/lib/article-content.json";
 import ArticleDetailContent from "@/components/article-detail-content";
 import type { ArticleData } from "@/components/article-detail-content";
+import { buildArticleMetadata } from "@/lib/article-metadata";
 
 type ContentMap = Record<string, ArticleData>;
 const content = articleContent as ContentMap;
@@ -13,20 +14,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const article = content[slug];
   if (!article) return { title: "Article | BEING at Full Potential" };
-
-  const description =
-    (article.blocks.find((b) => b.type === "paragraph") as { type: "paragraph"; text: string } | undefined)?.text?.slice(0, 160) ||
-    `Read "${article.title}" on BEING at Full Potential.`;
-
-  return {
-    title: `${article.title} | BEING at Full Potential`,
-    description,
-    openGraph: {
-      title: article.title,
-      description,
-      images: article.image ? [{ url: article.image }] : [],
-    },
-  };
+  return buildArticleMetadata(article, `/thoughtleadership/${slug}`, { kind: "article" });
 }
 
 export async function generateStaticParams() {

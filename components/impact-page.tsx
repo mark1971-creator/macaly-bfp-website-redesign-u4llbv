@@ -1,9 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { SafeImg } from "@/components/safe-img";
+import { getCaseStudyCards } from "@/lib/articles";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  type CarouselApi,
+} from "@/components/ui/carousel";
 
 // ─── Toast ──────────────────────────────────────────────────────────────────
 function Toast({ message, onClose }: { message: string; onClose: () => void }) {
@@ -249,38 +256,162 @@ const clientStories = [
   },
 ];
 
-const caseStudies = [
-  {
-    image: "/wp-content/uploads/2019/09/10626797_1218979294781847_4220713866197897045_n.jpg",
-    client: "Omega Healthcare Management Services",
-    sector: "Healthcare · India",
-    title: "Human Potential-Based Restructuring",
-    summary:
-      "Omega HMS used the Human Potential Assessment to redesign their client-facing teams around empathy, curiosity, and collaboration — matching people to roles where their inherent potential could be fully expressed.",
-    results: [
-      { metric: "+70%", label: "growth in existing client business" },
-      { metric: "+30%", label: "growth in new client business" },
-      { metric: "78 → 85", label: "Customer Orientation score" },
-      { metric: "74 → 81", label: "Compassion score" },
-    ],
-    href: "/case-studies/omega-hms",
-  },
-  {
-    image: "/wp-content/uploads/2017/06/IMG_2327-2-1080x675.jpg",
-    client: "Thornton's Budgens",
-    sector: "Retail · London, UK",
-    title: "Unleashing Self-Leadership in a Supermarket",
-    summary:
-      "After sales declined -7% in 2014, owner Andrew Thornton invested in developing human potential throughout the organisation. Coaching unlocked creativity at every level, driving a full business turnaround.",
-    results: [
-      { metric: "-7% → +5%", label: "like-for-like sales turnaround" },
-      { metric: "+55%", label: "average employee service length" },
-      { metric: "64%", label: "Human Potential score (8pts above benchmark)" },
-      { metric: "+1.5pts", label: "gross margin improvement" },
-    ],
-    href: "/case-studies/thorntons-budgens",
-  },
-];
+const caseStudyResults: Record<
+  string,
+  Array<{ metric: string; label: string }>
+> = {
+  "siam-computing": [
+    { metric: "IDG", label: "Inner Development Goals integrated into culture" },
+    { metric: "Alignment", label: "Measured culture–values alignment" },
+    { metric: "Engagement", label: "Stronger team collaboration & trust" },
+    { metric: "Innovation", label: "Human-centric approach to tech services" },
+  ],
+  "omega-hms": [
+    { metric: "+70%", label: "growth in existing client business" },
+    { metric: "+30%", label: "growth in new client business" },
+    { metric: "78 → 85", label: "Customer Orientation score" },
+    { metric: "74 → 81", label: "Compassion score" },
+  ],
+  "business-case-human-potential-realisation": [
+    { metric: "-7% → +5%", label: "like-for-like sales turnaround" },
+    { metric: "+55%", label: "average employee service length" },
+    { metric: "64%", label: "Human Potential score (8pts above benchmark)" },
+    { metric: "+1.5pts", label: "gross margin improvement" },
+  ],
+};
+
+const caseStudies = getCaseStudyCards().map((study) => ({
+  image: study.image,
+  client: study.client,
+  sector: study.sector,
+  title: study.title,
+  summary: study.summary,
+  results: caseStudyResults[study.slug] ?? [],
+  href: study.href,
+}));
+
+function CaseStudyCard({ cs }: { cs: (typeof caseStudies)[0] }) {
+  return (
+    <Link
+      href={cs.href}
+      className="group bg-white/5 border border-white/10 hover:border-gold/30 overflow-hidden flex flex-col h-full transition-all duration-400 hover:bg-white/8"
+    >
+      <div className="relative aspect-[16/9] overflow-hidden bg-navy/30 shrink-0">
+        <SafeImg
+          src={cs.image}
+          alt={cs.title}
+          className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy/60 to-transparent" />
+        <div className="absolute bottom-4 left-5">
+          <span className="font-body text-[10px] tracking-[0.2em] text-gold/80 uppercase bg-navy/70 backdrop-blur-sm px-3 py-1">
+            {cs.sector}
+          </span>
+        </div>
+      </div>
+
+      <div className="p-7 flex flex-col flex-1">
+        <p className="font-body text-xs tracking-[0.15em] text-gold/60 uppercase mb-2">{cs.client}</p>
+        <h3 className="font-display text-2xl font-light text-white mb-4 group-hover:text-gold transition-colors duration-300">
+          {cs.title}
+        </h3>
+        <p className="font-body text-sm text-white/50 leading-relaxed mb-7">{cs.summary}</p>
+
+        <div className="grid grid-cols-2 gap-3 mb-6">
+          {cs.results.map((r) => (
+            <div key={r.label} className="bg-white/5 border border-white/8 p-4">
+              <p className="font-display text-xl text-gold mb-1">{r.metric}</p>
+              <p className="font-body text-[11px] text-white/40 leading-snug">{r.label}</p>
+            </div>
+          ))}
+        </div>
+
+        <span className="font-body text-xs tracking-widest uppercase text-gold/60 group-hover:text-gold transition-colors mt-auto">
+          Read Full Case Study →
+        </span>
+      </div>
+    </Link>
+  );
+}
+
+function CaseStudiesCarousel() {
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+  const [snapCount, setSnapCount] = useState(0);
+
+  useEffect(() => {
+    if (!api) return;
+
+    const onSelect = () => {
+      setCurrent(api.selectedScrollSnap());
+      setSnapCount(api.scrollSnapList().length);
+    };
+
+    onSelect();
+    api.on("reInit", onSelect);
+    api.on("select", onSelect);
+
+    return () => {
+      api.off("reInit", onSelect);
+      api.off("select", onSelect);
+    };
+  }, [api]);
+
+  return (
+    <div>
+      <Carousel
+        setApi={setApi}
+        opts={{ align: "start", loop: true }}
+        className="w-full"
+      >
+        <CarouselContent className="-ml-4 md:-ml-6">
+          {caseStudies.map((cs) => (
+            <CarouselItem
+              key={cs.href}
+              className="pl-4 md:pl-6 basis-full lg:basis-1/2"
+            >
+              <CaseStudyCard cs={cs} />
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+      </Carousel>
+
+      <div className="flex items-center justify-center gap-6 mt-10">
+        <button
+          type="button"
+          onClick={() => api?.scrollPrev()}
+          className="w-10 h-10 border border-white/20 hover:border-gold hover:text-gold text-white/40 transition-all duration-300 flex items-center justify-center"
+          aria-label="Previous case study"
+        >
+          ←
+        </button>
+
+        <div className="flex gap-2">
+          {Array.from({ length: snapCount || caseStudies.length }).map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={() => api?.scrollTo(i)}
+              className={`rounded-full transition-all duration-300 ${
+                i === current ? "w-6 h-1.5 bg-gold" : "w-1.5 h-1.5 bg-white/20 hover:bg-gold/50"
+              }`}
+              aria-label={`Case study slide ${i + 1}`}
+            />
+          ))}
+        </div>
+
+        <button
+          type="button"
+          onClick={() => api?.scrollNext()}
+          className="w-10 h-10 border border-white/20 hover:border-gold hover:text-gold text-white/40 transition-all duration-300 flex items-center justify-center"
+          aria-label="Next case study"
+        >
+          →
+        </button>
+      </div>
+    </div>
+  );
+}
 
 const testimonials = [
   {
@@ -341,16 +472,112 @@ const testimonials = [
   },
 ];
 
+function TestimonialCard({ t }: { t: (typeof testimonials)[0] }) {
+  return (
+    <div className="bg-white border border-border p-7 flex flex-col h-full hover:border-gold/20 hover:shadow-md transition-all duration-300">
+      <div className="font-display text-5xl text-gold/25 leading-none mb-4 select-none">"</div>
+      <p className="font-body text-sm text-foreground/70 leading-relaxed flex-1 mb-6 italic">
+        {t.quote}
+      </p>
+      <div className="pt-4 border-t border-border">
+        <p className="font-display text-base text-navy">{t.name}</p>
+        <p className="font-body text-xs text-foreground/50 mt-0.5">
+          {t.title}{t.org ? ` · ${t.org}` : ""}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function TestimonialsCarousel() {
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+  const [snapCount, setSnapCount] = useState(0);
+
+  useEffect(() => {
+    if (!api) return;
+
+    const onSelect = () => {
+      setCurrent(api.selectedScrollSnap());
+      setSnapCount(api.scrollSnapList().length);
+    };
+
+    onSelect();
+    api.on("reInit", onSelect);
+    api.on("select", onSelect);
+
+    return () => {
+      api.off("reInit", onSelect);
+      api.off("select", onSelect);
+    };
+  }, [api]);
+
+  return (
+    <div>
+      <Carousel
+        setApi={setApi}
+        opts={{ align: "start", loop: true }}
+        className="w-full"
+      >
+        <CarouselContent className="-ml-4">
+          {testimonials.map((t, i) => (
+            <CarouselItem
+              key={i}
+              className="pl-4 basis-full md:basis-1/2 lg:basis-1/3"
+            >
+              <TestimonialCard t={t} />
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+      </Carousel>
+
+      <div className="flex items-center justify-center gap-6 mt-10">
+        <button
+          type="button"
+          onClick={() => api?.scrollPrev()}
+          className="w-10 h-10 border border-navy/20 hover:border-gold hover:text-gold text-navy/40 transition-all duration-300 flex items-center justify-center"
+          aria-label="Previous testimonial"
+        >
+          ←
+        </button>
+
+        <div className="flex gap-2">
+          {Array.from({ length: snapCount || testimonials.length }).map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={() => api?.scrollTo(i)}
+              className={`rounded-full transition-all duration-300 ${
+                i === current ? "w-6 h-1.5 bg-gold" : "w-1.5 h-1.5 bg-navy/20 hover:bg-gold/50"
+              }`}
+              aria-label={`Testimonial slide ${i + 1}`}
+            />
+          ))}
+        </div>
+
+        <button
+          type="button"
+          onClick={() => api?.scrollNext()}
+          className="w-10 h-10 border border-navy/20 hover:border-gold hover:text-gold text-navy/40 transition-all duration-300 flex items-center justify-center"
+          aria-label="Next testimonial"
+        >
+          →
+        </button>
+      </div>
+    </div>
+  );
+}
+
 const trustedOrgs = [
-  { name: "Procter & Gamble",    logo: "https://logo.clearbit.com/pg.com" },
-  { name: "Teach for America",   logo: "https://logo.clearbit.com/teachforamerica.org" },
-  { name: "Omega Healthcare",    logo: "https://logo.clearbit.com/omegahealthcare.com" },
-  { name: "Reckitt",             logo: "https://logo.clearbit.com/reckitt.com" },
-  { name: "Motilal Oswal",       logo: "https://logo.clearbit.com/motilaloswal.com" },
-  { name: "Essel Propack",       logo: "https://logo.clearbit.com/esselpropack.com" },
-  { name: "SingularityU",        logo: "https://logo.clearbit.com/su.org" },
-  { name: "TNS Switzerland",     logo: null },
-  { name: "Thornton's Budgens",  logo: null },
+  { name: "Procter & Gamble", logo: "/images/clients/procter-gamble.png" },
+  { name: "Teach for America", logo: "/images/clients/teach-for-america.jpg" },
+  { name: "Omega Healthcare", logo: "/images/clients/omega-healthcare.png" },
+  { name: "Reckitt", logo: "/images/clients/reckitt.png" },
+  { name: "Motilal Oswal", logo: "/images/clients/motilal-oswal.png" },
+  { name: "Essel Propack", logo: "/images/clients/essel-propack.png" },
+  { name: "SingularityU", logo: "/images/clients/singularityu.png" },
+  { name: "TNS Switzerland", logo: "/images/clients/tns-switzerland.png" },
+  { name: "Thornton's Budgens", logo: "/images/clients/thorntons-budgens.png" },
 ];
 
 // ─── Video Card ──────────────────────────────────────────────────────────────
@@ -442,7 +669,7 @@ export default function ImpactPage() {
           <p className="font-body text-xs tracking-[0.3em] text-gold mb-6 uppercase">Real Results</p>
           <h1 className="font-display text-5xl md:text-7xl font-light text-white leading-[1.05] max-w-4xl mb-6">
             Transformational{" "}
-            <span className="text-gold italic">Impact</span>
+            <span className="text-gold">Impact</span>
           </h1>
           <p className="font-body text-lg text-white/55 max-w-2xl leading-relaxed">
             From individual leaders to global organizations — here is what becomes possible when human potential is truly unleashed.
@@ -491,31 +718,20 @@ export default function ImpactPage() {
           <p className="font-body text-[10px] tracking-[0.3em] text-foreground/40 uppercase text-center mb-10">
             Trusted by organizations worldwide
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6">
-            {trustedOrgs.map((org) =>
-              org.logo ? (
-                <div key={org.name} className="flex flex-col items-center gap-2 group" title={org.name}>
-                  <SafeImg
-                    src={org.logo}
-                    alt={org.name}
-                    className="h-8 w-auto object-contain opacity-40 grayscale group-hover:opacity-70 group-hover:grayscale-0 transition-all duration-300"
-                    onError={(e) => {
-                      const target = e.currentTarget;
-                      target.style.display = "none";
-                      const sibling = target.nextElementSibling as HTMLElement | null;
-                      if (sibling) sibling.style.display = "block";
-                    }}
-                  />
-                  <span className="hidden font-display text-sm text-navy/40 group-hover:text-navy/70 transition-colors">
-                    {org.name}
-                  </span>
-                </div>
-              ) : (
-                <span key={org.name} className="font-display text-sm text-navy/40 hover:text-navy/70 transition-colors">
-                  {org.name}
-                </span>
-              )
-            )}
+          <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-8">
+            {trustedOrgs.map((org) => (
+              <div
+                key={org.name}
+                className="flex items-center justify-center group"
+                title={org.name}
+              >
+                <SafeImg
+                  src={org.logo}
+                  alt={org.name}
+                  className="h-10 w-auto max-w-[140px] object-contain opacity-50 grayscale group-hover:opacity-80 group-hover:grayscale-0 transition-all duration-300"
+                />
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -554,53 +770,7 @@ export default function ImpactPage() {
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-8">
-            {caseStudies.map((cs) => (
-              <Link
-                key={cs.href}
-                href={cs.href}
-                className="group bg-white/5 border border-white/10 hover:border-gold/30 overflow-hidden flex flex-col transition-all duration-400 hover:bg-white/8"
-              >
-                {/* Image */}
-                <div className="relative aspect-[16/9] overflow-hidden bg-navy/30 shrink-0">
-                  <SafeImg
-                    src={cs.image}
-                    alt={cs.title}
-                    className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy/60 to-transparent" />
-                  <div className="absolute bottom-4 left-5">
-                    <span className="font-body text-[10px] tracking-[0.2em] text-gold/80 uppercase bg-navy/70 backdrop-blur-sm px-3 py-1">
-                      {cs.sector}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className="p-7 flex flex-col flex-1">
-                  <p className="font-body text-xs tracking-[0.15em] text-gold/60 uppercase mb-2">{cs.client}</p>
-                  <h3 className="font-display text-2xl font-light text-white mb-4 group-hover:text-gold transition-colors duration-300">
-                    {cs.title}
-                  </h3>
-                  <p className="font-body text-sm text-white/50 leading-relaxed mb-7">{cs.summary}</p>
-
-                  {/* Results grid */}
-                  <div className="grid grid-cols-2 gap-3 mb-6">
-                    {cs.results.map((r) => (
-                      <div key={r.label} className="bg-white/5 border border-white/8 p-4">
-                        <p className="font-display text-xl text-gold mb-1">{r.metric}</p>
-                        <p className="font-body text-[11px] text-white/40 leading-snug">{r.label}</p>
-                      </div>
-                    ))}
-                  </div>
-
-                  <span className="font-body text-xs tracking-widest uppercase text-gold/60 group-hover:text-gold transition-colors mt-auto">
-                    Read Full Case Study →
-                  </span>
-                </div>
-              </Link>
-            ))}
-          </div>
+          <CaseStudiesCarousel />
         </div>
       </section>
 
@@ -615,26 +785,7 @@ export default function ImpactPage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {testimonials.map((t, i) => (
-              <div
-                key={i}
-                className="bg-white border border-border p-7 flex flex-col hover:border-gold/20 hover:shadow-md transition-all duration-300"
-              >
-                {/* Gold quote mark */}
-                <div className="font-display text-5xl text-gold/25 leading-none mb-4 select-none">"</div>
-                <p className="font-body text-sm text-foreground/70 leading-relaxed flex-1 mb-6 italic">
-                  {t.quote}
-                </p>
-                <div className="pt-4 border-t border-border">
-                  <p className="font-display text-base text-navy">{t.name}</p>
-                  <p className="font-body text-xs text-foreground/50 mt-0.5">
-                    {t.title}{t.org ? ` · ${t.org}` : ""}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <TestimonialsCarousel />
         </div>
       </section>
 

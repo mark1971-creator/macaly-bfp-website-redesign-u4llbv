@@ -42,7 +42,7 @@ Body:
 **Contact** (`components/home-page.tsx`):
 
 ```json
-{ "type": "contact", "name": "…", "email": "…", "message": "…" }
+{ "type": "contact", "name": "…", "email": "…", "message": "…", "website": "", "_formStarted": 1710000000000 }
 ```
 
 **HPCC application** (`components/academy-apply-page.tsx`):
@@ -58,7 +58,9 @@ Body:
   "role": "…",
   "coachingBackground": "…",
   "motivation": "…",
-  "heardFrom": "…"
+  "heardFrom": "…",
+  "website": "",
+  "_formStarted": 1710000000000
 }
 ```
 
@@ -72,9 +74,13 @@ Body:
   "mobile": "…",
   "country": "…",
   "interest": "…",
-  "invoicing": "…"
+  "invoicing": "…",
+  "website": "",
+  "_formStarted": 1710000000000
 }
 ```
+
+The `website` and `_formStarted` fields are added automatically by `useFormSpamFields()` — do not expose them in the UI.
 
 ### Email subjects
 
@@ -88,7 +94,7 @@ Body:
 
 | Status | Meaning |
 |--------|---------|
-| `200` | `{ "success": true }` |
+| `200` | `{ "success": true }` — includes silent success for blocked spam submissions |
 | `503` | `BREVO_API_KEY` not configured |
 | `500` | Brevo API error (check server logs) |
 
@@ -156,8 +162,32 @@ Invoke-RestMethod -Uri "http://localhost:3000/api/contact" `
 
 ---
 
+## Spam protection
+
+Contact and course registration forms include lightweight bot protection (no third-party keys required).
+
+| Layer | Implementation | File |
+|-------|----------------|------|
+| Honeypot | Hidden `website` field — bots that fill it are rejected | `components/form-spam-fields.tsx` |
+| Timing | Submissions within 3 s of page load are rejected | `lib/form-spam-guard.ts` |
+| Rate limit | Max 8 submissions per IP per 15 min | `lib/form-spam-guard.ts` |
+
+Blocked submissions return `{ "success": true }` without sending email, so bots get no useful signal.
+
+**Client hook:** `useFormSpamFields()` — used in homepage contact, HPCC apply, and IDG registration forms.
+
+**Server check:** `checkSubmissionSpam()` runs at the start of `POST /api/contact`.
+
+### Production notes
+
+- Rate limiting is **in-memory per server instance**. On serverless (Vercel), this still helps but is not a hard global cap. Honeypot + timing catch most automated spam.
+- Real users who submit instantly after page load may be blocked — unlikely in practice.
+- Newsletter signup (`/api/newsletter`) is **not** protected yet.
+
+---
+
 ## Security notes
 
 - API keys are server-side only (`BREVO_*` without `NEXT_PUBLIC_` prefix)
-- No rate limiting is implemented — consider adding middleware or Brevo-side limits for production hardening
 - Form fields are interpolated into HTML email without sanitization — acceptable for internal notification emails to a trusted recipient
+- For stronger protection under heavy spam, add Cloudflare Turnstile or hCaptcha

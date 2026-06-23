@@ -12,14 +12,14 @@ All long-form content lives in **`lib/article-content.json`**.
 
 | Type | Count | Route |
 |------|-------|-------|
-| Articles | 59 | `/thoughtleadership/[slug]` |
+| Articles | 35 | `/thoughtleadership/[slug]` |
 | Case studies | 3 | `/case-studies/[slug]` |
 
 Case study slugs:
 
 - `siam-computing`
 - `omega-hms`
-- `thorntons-budgens`
+- `business-case-human-potential-realisation` (legacy slug `thorntons-budgens` redirects here)
 
 ### Entry structure
 
@@ -72,6 +72,36 @@ This re-scrapes WordPress and regenerates the JSON file.
 
 Both use `generateStaticParams()` so new slugs require a rebuild to appear in production.
 
+### Article helpers
+
+**`lib/articles.ts`** — shared helpers for listing pages:
+
+- `getArticleCards()`, `getCaseStudyCards()` — card data for insight/thought leadership pages
+- `formatArticleDate()`, `getExcerpt()` — display utilities
+
+### SEO metadata for articles
+
+**`lib/article-metadata.ts`** — `buildArticleMetadata()` generates per-article Open Graph and Twitter metadata (hero image, first-paragraph description, canonical URL). Used by:
+
+- `app/thoughtleadership/[slug]/page.tsx`
+- `app/case-studies/[slug]/page.tsx`
+
+Requires `NEXT_PUBLIC_SITE_URL` in production for absolute image URLs (defaults to `https://beingatfullpotential.com`).
+
+### Legacy redirects
+
+**`lib/article-redirects.json`** — 189 redirects from old WordPress paths to new routes. Regenerated on every build via `scripts/fix-article-redirects.mjs`.
+
+- Removed articles redirect to `/insight` (not homepage)
+- Published articles/case studies are never redirected to `/`
+- Legacy examples: `/human-potential-model-validation` → article, `/our-team` → `/team`, `/thorntons-budgens` → case study
+
+To regenerate manually:
+
+```bash
+node scripts/fix-article-redirects.mjs
+```
+
 ---
 
 ## Page-level copy
@@ -113,6 +143,10 @@ export const metadata: Metadata = {
 };
 ```
 
+### Per-article metadata (articles & case studies)
+
+Dynamic article and case study routes use `buildArticleMetadata()` from `lib/article-metadata.ts` for Open Graph/Twitter cards with hero images.
+
 ### Shared metadata file
 
 `app/metadata.json` holds title/description for:
@@ -138,6 +172,9 @@ Legacy WordPress media is **self-hosted** in `public/wp-content/uploads/…` and
 
 Additional images load from:
 
+- `public/images/articles/` — article hero and inline images
+- `public/images/case-studies/` — case study screenshots
+- `public/images/clients/` — client logos
 - Pexels stock photos
 - Third-party logos (IDG, client logos)
 

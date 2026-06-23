@@ -376,7 +376,7 @@ export default function AssessmentPage() {
           <p className="font-body text-xs tracking-[0.3em] text-gold mb-6 uppercase">Human Potential Assessment</p>
           <h1 className="font-display text-5xl md:text-7xl font-light text-white leading-[1.05] max-w-4xl mb-6">
             Measure What{" "}
-            <span className="text-gold italic">Matters Most</span>
+            <span className="text-gold">Matters Most</span>
           </h1>
           <p className="font-body text-lg text-white/60 max-w-2xl leading-relaxed mt-6">
             Most organisations measure the visible tip of the iceberg. We go deeper —
@@ -385,11 +385,6 @@ export default function AssessmentPage() {
           </p>
         </div>
 
-        {/* Scroll cue — kept for a11y anchor */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40">
-          <div className="w-px h-12 bg-white/40" />
-          <span className="font-body text-[9px] tracking-[0.3em] text-white/60 uppercase">Scroll</span>
-        </div>
       </section>
 
       {/* ── FOUR ASSESSMENT TOOLS ─────────────────────────────────────────────── */}
@@ -501,14 +496,6 @@ export default function AssessmentPage() {
             ))}
           </div>
 
-          <div className="text-center mt-12">
-            <Link
-              href="/thoughtleadership/6-organizational-performance-metrics"
-              className="font-body text-xs tracking-[0.2em] uppercase border border-gold/40 text-gold/80 px-8 py-4 hover:border-gold hover:text-gold transition-all inline-block"
-            >
-              Read the Full OPM Framework
-            </Link>
-          </div>
         </div>
       </section>
 

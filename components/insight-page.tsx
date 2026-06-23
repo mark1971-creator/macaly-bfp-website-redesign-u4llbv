@@ -4,6 +4,10 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { SafeImg } from "@/components/safe-img";
+import {
+  getFeaturedInsightArticle,
+  getInsightArticleHighlights,
+} from "@/lib/articles";
 
 // ─── Toast ─────────────────────────────────────────────────────────────────────
 function Toast({ message, onClose }: { message: string; onClose: () => void }) {
@@ -105,45 +109,36 @@ function Nav({ onNotImplemented }: { onNotImplemented: (msg: string) => void }) 
 }
 
 // ─── Content data ──────────────────────────────────────────────────────────────
-const featuredArticle = {
-  image: "/wp-content/uploads/2026/04/Heading.png",
-  title: "Humanity's Inner Development: What the 2026 IDG Meta-Analysis Reveals",
-  date: "April 9, 2026",
-  excerpt:
-    "Key findings from an Inner Development Goals (IDG) meta-analysis conducted in March 2026. The study aggregates self-assessments from approximately 3,200 individuals across five continents, examining global top and bottom inner skills across the dimensions of Being, Thinking, Relating, Collaborating, and Acting.",
-  href: "/thoughtleadership/humanitys-inner-development",
-  tag: "Research",
-};
+const featuredArticle = (() => {
+  const a = getFeaturedInsightArticle();
+  if (!a) {
+    return {
+      image: "/images/article-fallback.jpg",
+      title: "Thought Leadership",
+      date: "",
+      excerpt: "",
+      href: "/thoughtleadership",
+      tag: "Insight",
+    };
+  }
+  return {
+    image: a.image,
+    title: a.title,
+    date: a.date,
+    excerpt: a.excerpt,
+    href: a.href,
+    tag: "Thought Leadership",
+  };
+})();
 
-const articles = [
-  {
-    image: "/wp-content/uploads/2023/08/q41ieu3p.png",
-    title: "Countering the threat of AI: Being fully HUMAN is the next competitive advantage",
-    date: "August 25, 2023",
-    tag: "Leadership",
-    excerpt:
-      "Just a few years ago, it would have been hard to imagine how quickly AI could become part of our lives. The power of these tools is undeniable — yet they compete with human creativity, empathy and presence.",
-    href: "/thoughtleadership/countering-the-threat-of-ai",
-  },
-  {
-    image: "/wp-content/uploads/2023/06/Maslow-Leadership-Diagram-Needs-at-Work-v5-1024x663-1.jpg",
-    title: "Improving Employee Experience through Workplace Actualization",
-    date: "June 14, 2023",
-    tag: "Organizations",
-    excerpt:
-      "HR leaders increasingly talk about Employee Experience as the key to organizational breakthroughs. Yet placing wellbeing at the center has led to an explosion of programs missing the deeper root cause.",
-    href: "/thoughtleadership/improving-employee-experience",
-  },
-  {
-    image: "/wp-content/uploads/2023/01/1668418869806.png",
-    title: "Is our approach to Human Potential Development scientifically validated?",
-    date: "January 23, 2023",
-    tag: "Science",
-    excerpt:
-      "As Inner Development & growth is increasingly recognized as a pre-requisite to outer world change, our work is becoming more relevant — and more closely scrutinized. Here's the evidence.",
-    href: "/thoughtleadership/human-potential-model-validation",
-  },
-];
+const articles = getInsightArticleHighlights(3).map((a) => ({
+  image: a.image,
+  title: a.title,
+  date: a.date,
+  tag: "Insight",
+  excerpt: a.excerpt,
+  href: a.href,
+}));
 
 const videos = [
   {
@@ -254,7 +249,7 @@ export default function InsightPage() {
           <p className="font-body text-xs tracking-[0.3em] text-gold mb-6 uppercase">Insight</p>
           <h1 className="font-display text-5xl md:text-7xl font-light text-white leading-[1.05] max-w-4xl mb-6">
             Access{" "}
-            <span className="text-gold italic">New Horizons</span>
+            <span className="text-gold">New Horizons</span>
           </h1>
           <p className="font-body text-lg text-white/60 max-w-2xl leading-relaxed mt-6">
             We believe shifts in mindsets drive progress and innovation. We relentlessly challenge existing beliefs about success, performance, happiness — and the constructs that limit meaningful change.

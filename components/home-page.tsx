@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { SafeImg } from "@/components/safe-img";
+import { useFormSpamFields } from "@/components/form-spam-fields";
 
 // ─── Toast Notification ────────────────────────────────────────────────────────
 function Toast({ message, onClose }: { message: string; onClose: () => void }) {
@@ -96,7 +97,12 @@ function Navigation({ onNotImplemented }: { onNotImplemented: (msg: string) => v
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
-  const navLinks = [
+  const navLinks: Array<{
+    label: string;
+    href: string;
+    scroll?: boolean;
+    external?: boolean;
+  }> = [
     { label: "About", href: "/about" },
     { label: "Insight", href: "/insight" },
     { label: "Impact", href: "/impact" },
@@ -359,11 +365,6 @@ function HeroSection({ onNotImplemented }: { onNotImplemented: (msg: string) => 
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/40">
-        <span className="font-body text-xs tracking-widest uppercase">Scroll</span>
-        <div className="w-px h-10 bg-gradient-to-b from-white/40 to-transparent" />
-      </div>
     </section>
   );
 }
@@ -863,7 +864,7 @@ const clients = [
   { name: "AKQA", logo: "/wp-content/uploads/2019/05/akqa.png" },
 ];
 
-function ClientsSection({ onNotImplemented }: { onNotImplemented: (msg: string) => void }) {
+function ClientsSection() {
   return (
     <section className="py-24 bg-white border-t border-border">
       <div className="max-w-7xl mx-auto px-6">
@@ -886,16 +887,6 @@ function ClientsSection({ onNotImplemented }: { onNotImplemented: (msg: string) 
             </div>
           ))}
         </div>
-
-        <div className="text-center mt-12">
-          <ComingSoonLink
-            href="/clients"
-            onNotImplemented={onNotImplemented}
-            className="font-body text-sm tracking-widest uppercase text-navy/50 hover:text-gold transition-colors duration-300 underline underline-offset-4"
-          >
-            See More Clients
-          </ComingSoonLink>
-        </div>
       </div>
     </section>
   );
@@ -905,6 +896,7 @@ function ClientsSection({ onNotImplemented }: { onNotImplemented: (msg: string) 
 function ContactSection() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const { spamFields, SpamFields } = useFormSpamFields();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -914,7 +906,7 @@ function ContactSection() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ type: "contact", ...form }),
+        body: JSON.stringify({ type: "contact", ...form, ...spamFields }),
       });
       if (!res.ok) throw new Error("Send failed");
       setStatus("sent");
@@ -1011,7 +1003,8 @@ function ContactSection() {
               </button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="relative space-y-6">
+              <SpamFields />
               <div>
                 <label className="block font-body text-xs tracking-widest uppercase text-white/50 mb-2">
                   Name
@@ -1228,7 +1221,7 @@ export default function HomePage() {
         <TestimonialsSection />
         <TeamSection onNotImplemented={toast.show} />
         <StandardsSection onNotImplemented={toast.show} />
-        <ClientsSection onNotImplemented={toast.show} />
+        <ClientsSection />
         <ContactSection />
       </main>
 

@@ -61,9 +61,9 @@ npm run start
 | `/about` | About the organisation |
 | `/insight` | Thought leadership hub + newsletter signup |
 | `/thoughtleadership` | Full article archive |
-| `/thoughtleadership/[slug]` | Individual article (59 articles) |
+| `/thoughtleadership/[slug]` | Individual article (35 articles) |
 | `/impact` | Impact pillars and case study highlights |
-| `/case-studies/[slug]` | Case studies: `siam-computing`, `omega-hms`, `thorntons-budgens` |
+| `/case-studies/[slug]` | Case studies: `siam-computing`, `omega-hms`, `business-case-human-potential-realisation` |
 | `/assessments` | Human Potential Assessment overview |
 | `/individuals` | Individual offering |
 | `/teams` | Team offering |
@@ -96,7 +96,7 @@ Copy `.env.example` to `.env.local` for local development. See [Deployment](./do
 | Script | Command |
 |--------|---------|
 | Dev server | `npm run dev` |
-| Production build | `npm run build` |
+| Production build | `npm run build` (regenerates legacy redirects, then Next.js build) |
 | Production server | `npm run start` |
 | Lint | `npm run lint` |
 | Tests | `npm run test` / `npm run test:run` |
@@ -106,8 +106,10 @@ Copy `.env.example` to `.env.local` for local development. See [Deployment](./do
 
 ## Key integrations
 
-- **Forms** → `POST /api/contact` (contact, HPCC apply, IDG registration) via Brevo transactional email
+- **Forms** → `POST /api/contact` (contact, HPCC apply, IDG registration) via Brevo transactional email — includes honeypot + timing spam protection
 - **Newsletter** → `POST /api/newsletter` via Brevo Contacts API (Insight page)
+- **Legacy URLs** → 189 redirects in `lib/article-redirects.json` (regenerated at build time)
+- **Social sharing** → Per-article Open Graph/Twitter metadata via `lib/article-metadata.ts`
 - **Assessment platform** → External links to `beingatfullpotential.io`
 
 ---

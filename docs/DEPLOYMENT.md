@@ -72,18 +72,46 @@ Create a contact list in Brevo and set `BREVO_LIST_ID` to its numeric ID.
 ## Build & verify before deploy
 
 ```bash
-npm run build    # Must complete without errors
+npm run build    # Runs redirect sync + Next.js build — must complete without errors
 npm run start    # Smoke-test at http://localhost:3000
 ```
+
+The build script runs `scripts/fix-article-redirects.mjs` first, which regenerates `lib/article-redirects.json` and strips stale self/home redirects for published content.
 
 Verify:
 
 - [ ] Homepage loads, favicon visible in browser tab
 - [ ] `/assessments` loads
-- [ ] Submit test on `/#contact` (with Brevo configured)
-- [ ] Submit test on `/academy/apply`
-- [ ] `/thoughtleadership/redefining-validation` renders article body
+- [ ] Submit test on `/#contact` (with Brevo configured; wait 3+ seconds before submit)
+- [ ] Submit test on `/academy/apply` and `/academy/idg-certification`
+- [ ] `/thoughtleadership/redefining-validation` renders article body with hero image
 - [ ] `/case-studies/siam-computing` renders case study
+- [ ] Legacy URL `/human-potential-model-validation` redirects to the correct article
+- [ ] Legacy URL `/our-team` redirects to `/team`
+- [ ] Share preview on an article shows hero image + intro text (requires `NEXT_PUBLIC_SITE_URL`)
+
+---
+
+## Production checklist
+
+Before going live (or after each major deploy), confirm:
+
+| Item | Action |
+|------|--------|
+| **Brevo API key** | Set `BREVO_API_KEY` in hosting env vars |
+| **Brevo IP restriction** | Disable for the website API key — serverless hosts use changing IPs |
+| **Site URL** | Set `NEXT_PUBLIC_SITE_URL=https://beingatfullpotential.com` for correct OG/Twitter URLs |
+| **Newsletter list** | Set `BREVO_LIST_ID` if newsletter signups should land in a Brevo list |
+| **Sender domain** | Verify `mark@beingatfullpotential.com` in Brevo |
+| **Build passes** | `npm run build` completes; check route table (~61 static pages) |
+| **Redirects** | 189 legacy WordPress paths → new routes (removed articles → `/insight`) |
+| **Secrets** | Never commit `.env.local` — already gitignored |
+
+### Known limitations
+
+- **Form rate limiting** uses in-memory counters per server instance. Honeypot and minimum submit time (3 s) still block most bots; for heavy spam, add Cloudflare Turnstile later.
+- **TypeScript** — `ignoreBuildErrors: true` in `next.config.js`; run `npx tsc --noEmit` locally to catch type issues.
+- **Newsletter form** has no spam protection yet (only contact + course registration forms do).
 
 ---
 

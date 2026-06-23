@@ -330,7 +330,7 @@ export default function AcademyPage() {
           <p className="font-body text-xs tracking-[0.3em] text-gold mb-6 uppercase">Human Potential Coach Certification</p>
           <h1 className="font-display text-5xl md:text-7xl font-light text-white leading-[1.05] max-w-4xl mb-6">
             Take Your Coaching{" "}
-            <span className="text-gold italic">Practice Further</span>
+            <span className="text-gold">Practice Further</span>
           </h1>
           <p className="font-body text-lg text-white/60 max-w-2xl leading-relaxed mt-6">
             Join our vibrant community of Human Potential Coaches working on 4 continents.

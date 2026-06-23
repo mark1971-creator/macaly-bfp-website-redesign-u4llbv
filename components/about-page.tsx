@@ -255,7 +255,7 @@ export default function AboutPage() {
           <p className="font-body text-xs tracking-[0.3em] text-gold mb-6 uppercase">About Us</p>
           <h1 className="font-display text-5xl md:text-7xl font-light text-white leading-[1.05] max-w-4xl mb-6">
             Every Human,<br />
-            <span className="text-gold italic">BEING at Full Potential.</span>
+            <span className="text-gold">BEING at Full Potential.</span>
           </h1>
           <p className="font-body text-lg text-white/60 max-w-2xl leading-relaxed mt-6">
             Are you ready to express yours?
@@ -269,7 +269,7 @@ export default function AboutPage() {
           <p className="font-body text-xs tracking-[0.3em] text-gold uppercase mb-6">Who We Are</p>
           <h2 className="font-display text-4xl md:text-5xl font-light text-navy leading-[1.15] mb-8">
             We believe that expressing our Human Potential is a{" "}
-            <span className="text-gold italic">basic human right.</span>
+            <span className="text-gold">basic human right.</span>
           </h2>
           <div className="w-16 h-px bg-gold mb-10" />
           <div className="space-y-5 text-foreground/70 font-body text-base leading-relaxed">
@@ -348,7 +348,7 @@ export default function AboutPage() {
               <p className="font-body text-xs tracking-[0.3em] text-gold uppercase mb-6">Our Reach</p>
               <h2 className="font-display text-4xl md:text-5xl font-light text-navy leading-[1.15] mb-8">
                 A global community across{" "}
-                <span className="text-gold italic">4 continents.</span>
+                <span className="text-gold">4 continents.</span>
               </h2>
               <div className="space-y-5 text-foreground/70 font-body text-base leading-relaxed">
                 <p>
@@ -384,7 +384,7 @@ export default function AboutPage() {
           {/* Timeline divider */}
           <div className="flex items-center gap-4 mb-12 justify-center">
             <div className="h-px bg-gold/30 flex-1 max-w-[100px]" />
-            <div className="font-display text-2xl text-gold italic">2010</div>
+            <div className="font-display text-2xl text-gold">2010</div>
             <div className="h-px bg-gold/30 flex-1 max-w-[100px]" />
           </div>
 
