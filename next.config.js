@@ -36,9 +36,6 @@ const nextConfig = {
     browserDebugInfoInTerminal: true,
   },
   reactStrictMode: false,
-  typescript: {
-    ignoreBuildErrors: true,
-  },
   images: {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [
