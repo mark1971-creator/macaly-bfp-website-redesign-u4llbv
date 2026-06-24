@@ -227,7 +227,7 @@ export default function OrganizationsPage() {
           {/* Iceberg visual */}
           <div className="max-w-5xl mx-auto">
             <Image
-              src="https://assets.macaly-user-data.dev/cdn-cgi/image/format=webp,width=2000,height=2000,fit=scale-down,quality=90,anim=true/c3icnrwiugzfahhbqx42cw8x/u4llbvnely5jgcx59ux6d1j6/hG5bksjD6tmsPey3yhous.jpg"
+              src="/images/iceberg.jpg"
               alt="The Organisational Performance Iceberg — 4 Being States, 8 Being Attitudes below the surface driving performance metrics above"
               width={1500}
               height={820}

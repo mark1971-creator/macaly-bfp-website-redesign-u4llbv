@@ -44,9 +44,9 @@ function sunIconSvg(size = 512, { padded = true } = {}) {
   const gear = buildSunIconPath(cx, cy, 12, innerR, outerR);
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
-  <rect width="${size}" height="${size}" fill="${NAVY}" rx="${padded ? size * 0.12 : 0}"/>
-  <path d="${gear}" fill="${WHITE}"/>
-  <circle cx="${cx}" cy="${cy}" r="${innerR * 0.92}" fill="${NAVY}"/>
+  <rect width="${size}" height="${size}" fill="${WHITE}" rx="${padded ? size * 0.12 : 0}"/>
+  <path d="${gear}" fill="${NAVY}"/>
+  <circle cx="${cx}" cy="${cy}" r="${innerR * 0.92}" fill="${WHITE}"/>
 </svg>`;
 }
 

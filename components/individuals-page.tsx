@@ -245,7 +245,7 @@ export default function IndividualsPage() {
             </div>
             <div className="flex items-center justify-center">
               <Image
-                src="https://assets.macaly-user-data.dev/cdn-cgi/image/format=webp,width=2000,height=2000,fit=scale-down,quality=90,anim=true/c3icnrwiugzfahhbqx42cw8x/u4llbvnely5jgcx59ux6d1j6/FVNiGhw8gQNsmcODtTLbv.png"
+                src="/images/house.png"
                 alt="The Human Potential House — Being Inspired, Being Abundant, Being in Service, Being Aware"
                 width={580}
                 height={680}
