@@ -70,18 +70,11 @@ export function getArticleBySlug(slug: string): ArticleData | undefined {
 }
 
 export function getFeaturedInsightArticle(): ArticleCard | undefined {
-  const featured =
-    getThoughtLeadershipArticles().find(
-      (a) => a.slug === "inner-development-goals-to-measure-or-not-2026"
-    ) ?? getThoughtLeadershipArticles()[0];
-  return featured;
+  return getThoughtLeadershipArticles()[0];
 }
 
 export function getInsightArticleHighlights(limit = 3): ArticleCard[] {
-  const skip = new Set(["inner-development-goals-to-measure-or-not-2026"]);
-  return getThoughtLeadershipArticles()
-    .filter((a) => !skip.has(a.slug))
-    .slice(0, limit);
+  return getThoughtLeadershipArticles().slice(1, 1 + limit);
 }
 
 export type CaseStudyCard = {

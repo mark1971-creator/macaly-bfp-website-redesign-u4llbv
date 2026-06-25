@@ -27,6 +27,17 @@ function absoluteImageUrl(image?: string): string {
   return `${SITE_URL}${image.startsWith("/") ? image : `/${image}`}`;
 }
 
+function ogImageUrl(image?: string): string {
+  if (!image || image.includes("article-fallback")) {
+    return `${SITE_URL}${DEFAULT_OG}`;
+  }
+  if (image.startsWith("http://") || image.startsWith("https://")) {
+    return image;
+  }
+  const ogPath = image.replace("/images/articles/", "/images/og/");
+  return `${SITE_URL}${ogPath.startsWith("/") ? ogPath : `/${ogPath}`}`;
+}
+
 export function buildArticleMetadata(
   article: ArticleLike,
   path: string,
@@ -40,7 +51,7 @@ export function buildArticleMetadata(
       : `Read "${article.title}" on BEING at Full Potential.`);
 
   const pageUrl = `${SITE_URL}${path}`;
-  const imageUrl = absoluteImageUrl(article.image);
+  const imageUrl = ogImageUrl(article.image);
   const titleSuffix =
     kind === "case-study" ? "Case Study | BEING at Full Potential" : "BEING at Full Potential";
 
