@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { SafeImg } from "@/components/safe-img";
@@ -15,6 +15,7 @@ type Block =
   | { type: "paragraph"; text: string }
   | { type: "ul" | "ol"; items: string[] }
   | { type: "blockquote"; text: string }
+  | { type: "callout"; text: string; label?: string }
   | { type: "image"; src: string; alt: string; caption: string }
   | {
       type: "skill-grid";
@@ -257,7 +258,7 @@ function ImageTextSplitBlock({
 }
 
 // ─── Block renderer ─────────────────────────────────────────────────────────
-function RenderBlock({ block, index }: { block: Block; index: number }) {
+function RenderBlock({ block, index, isAbstract }: { block: Block; index: number; isAbstract?: boolean }) {
   if (block.type === "skill-grid") {
     return <SkillGridBlock block={block} />;
   }
@@ -274,17 +275,24 @@ function RenderBlock({ block, index }: { block: Block; index: number }) {
     const Tag = `h${block.level}` as "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
     const sizeMap: Record<number, string> = {
       1: "font-display text-3xl md:text-4xl font-light text-navy leading-tight mt-12 mb-2",
-      2: "font-display text-2xl md:text-3xl font-light text-navy leading-tight mt-10 mb-4",
-      3: "font-display text-xl md:text-2xl font-light text-navy mt-8 mb-3",
+      2: "font-display text-2xl md:text-3xl font-light text-navy leading-tight mt-16 mb-5",
+      3: "font-display text-xl md:text-2xl font-medium text-navy mt-10 mb-3",
       4: "font-body text-lg font-semibold text-navy mt-6 mb-2",
       5: "font-body text-base font-semibold text-navy/80 mt-5 mb-2",
       6: "font-body text-sm font-semibold uppercase tracking-wider text-gold mt-4 mb-2",
     };
 
-    // Detect numbered headings: "1. Title Text" or lettered "a. Subsection"
     const numberedMatch = block.text.match(/^(\d+)\.\s+(.+)$/);
     const letteredMatch = block.text.match(/^([a-z])\.\s+(.+)$/i);
     const romanMatch = block.text.match(/^([ivx]+)\.\s+(.+)$/i);
+
+    const sectionDivider = block.level === 2 && index > 0 ? (
+      <div className="mt-16 mb-6 flex items-center gap-4">
+        <div className="h-px flex-1 bg-gold/15" />
+        <div className="w-1.5 h-1.5 rounded-full bg-gold/30" />
+        <div className="h-px flex-1 bg-gold/15" />
+      </div>
+    ) : null;
 
     if (numberedMatch) {
       const [, num, title] = numberedMatch;
@@ -297,14 +305,17 @@ function RenderBlock({ block, index }: { block: Block; index: number }) {
           ? "text-lg"
           : "text-xl md:text-2xl";
       return (
-        <div className={`flex items-baseline gap-4 ${isLarge ? "mt-10 mb-5" : "mt-8 mb-4"}`}>
-          <span className={`shrink-0 font-display text-gold leading-none tabular-nums ${numSize}`}>
-            {num}
-          </span>
-          <Tag className={`${sizeMap[block.level] || sizeMap[2]} mt-0 mb-0 flex-1 min-w-0`}>
-            {cleanTitle}
-          </Tag>
-        </div>
+        <>
+          {sectionDivider}
+          <div className={`flex items-baseline gap-4 ${isLarge ? "mt-10 mb-5" : "mt-8 mb-4"}`}>
+            <span className={`shrink-0 font-display text-gold leading-none tabular-nums ${numSize}`}>
+              {num}
+            </span>
+            <Tag className={`${sizeMap[block.level] || sizeMap[2]} mt-0 mb-0 flex-1 min-w-0`}>
+              {cleanTitle}
+            </Tag>
+          </div>
+        </>
       );
     }
 
@@ -314,7 +325,7 @@ function RenderBlock({ block, index }: { block: Block; index: number }) {
       const title = match[2];
       const cleanTitle = autoTitle(title);
       return (
-        <div className="flex items-baseline gap-3 mt-6 mb-3">
+        <div className="flex items-baseline gap-3 mt-7 mb-3">
           <span className="shrink-0 font-display text-gold text-lg leading-none w-6 text-right">
             {marker.toLowerCase()}.
           </span>
@@ -336,31 +347,42 @@ function RenderBlock({ block, index }: { block: Block; index: number }) {
     }
 
     return (
-      <Tag className={sizeMap[block.level] || sizeMap[2]}>
-        {cleanText}
-      </Tag>
+      <>
+        {sectionDivider}
+        <Tag className={sizeMap[block.level] || sizeMap[2]}>
+          {cleanText}
+        </Tag>
+      </>
     );
   }
 
   if (block.type === "paragraph") {
-    // Skip lines that look like author bylines (short, contain "|" and date-like text)
     if (block.text.match(/^\s*by .+\|\s*(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)/i)) {
       return null;
     }
+    if (isAbstract) {
+      return (
+        <p
+          className="font-body text-[19px] text-navy/85 leading-[1.9] mb-6"
+          dangerouslySetInnerHTML={{ __html: block.text }}
+        />
+      );
+    }
     return (
-      <p className="font-body text-[17px] text-foreground/80 leading-[1.85] mb-5">
-        {block.text}
-      </p>
+      <p
+        className="font-body text-[17px] text-foreground/80 leading-[1.85] mb-6 article-body-text"
+        dangerouslySetInnerHTML={{ __html: block.text }}
+      />
     );
   }
 
   if (block.type === "ul") {
     return (
-      <ul className="mb-6 space-y-2 ml-1">
+      <ul className="mb-7 space-y-3 ml-1">
         {block.items.map((item, i) => (
           <li key={i} className="flex items-start gap-3 font-body text-[17px] text-foreground/80 leading-relaxed">
-            <span className="mt-[9px] shrink-0 w-1.5 h-1.5 rounded-full bg-gold" />
-            <span>{item}</span>
+            <span className="mt-[9px] shrink-0 w-2 h-2 rounded-full bg-gold/70" />
+            <span dangerouslySetInnerHTML={{ __html: item }} />
           </li>
         ))}
       </ul>
@@ -369,11 +391,11 @@ function RenderBlock({ block, index }: { block: Block; index: number }) {
 
   if (block.type === "ol") {
     return (
-      <ol className="mb-6 space-y-2 ml-1">
+      <ol className="mb-7 space-y-3 ml-1">
         {block.items.map((item, i) => (
           <li key={i} className="flex items-start gap-3 font-body text-[17px] text-foreground/80 leading-relaxed">
             <span className="shrink-0 font-display text-gold text-lg leading-none mt-0.5 w-6 text-right">{i + 1}.</span>
-            <span>{item}</span>
+            <span dangerouslySetInnerHTML={{ __html: item }} />
           </li>
         ))}
       </ol>
@@ -382,7 +404,7 @@ function RenderBlock({ block, index }: { block: Block; index: number }) {
 
   if (block.type === "blockquote") {
     return (
-      <blockquote className="my-8 pl-6 border-l-2 border-gold">
+      <blockquote className="my-10 pl-8 py-6 border-l-[3px] border-gold bg-gold/[0.04] rounded-r-sm">
         <p className="font-display text-xl md:text-2xl font-light text-navy/80 italic leading-relaxed">
           {block.text}
         </p>
@@ -390,16 +412,93 @@ function RenderBlock({ block, index }: { block: Block; index: number }) {
     );
   }
 
+  if (block.type === "callout") {
+    const label = (block as any).label || "Key Insight";
+    return (
+      <div className="my-10 bg-navy rounded-sm overflow-hidden">
+        <div className="px-8 py-8">
+          <span className="inline-block font-body text-[10px] tracking-[0.25em] uppercase text-gold mb-3">
+            {label}
+          </span>
+          <p
+            className="font-display text-lg md:text-xl font-light text-white/90 leading-relaxed"
+            dangerouslySetInnerHTML={{ __html: (block as any).text }}
+          />
+        </div>
+        <div className="h-1 bg-gradient-to-r from-gold/60 via-gold/30 to-transparent" />
+      </div>
+    );
+  }
+
   if (block.type === "image" && block.src) {
+    const isQuoteImage =
+      block.src.toLowerCase().includes("quote") ||
+      (block.alt || "").toLowerCase().includes("quote");
+    const isFigureOrTable =
+      (block.alt || "").match(/^(Figure|Table)\s+\d/i) ||
+      (block.caption || "").match(/^(Figure|Table)\s+\d/i);
     const isAppScreenshot = block.src.includes("/case-studies/siam/");
     const isSiamComposite =
       block.src.includes("/siam-computing/inline-08") ||
       block.src.includes("/siam-computing/inline-09");
     const isArticleDiagram = block.src.startsWith("/images/articles/");
     const useContain = isAppScreenshot || isSiamComposite || isArticleDiagram;
+
+    if (isQuoteImage) {
+      return (
+        <figure className="my-10 max-w-2xl mx-auto">
+          <div className="bg-navy/[0.03] border-l-[3px] border-gold p-6 md:p-8">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <SafeImg
+              src={block.src}
+              alt={block.alt || ""}
+              className="w-full object-contain"
+              onError={(e) => {
+                const fig = e.currentTarget.closest("figure") as HTMLElement | null;
+                if (fig) fig.style.display = "none";
+              }}
+            />
+          </div>
+        </figure>
+      );
+    }
+
+    if (isFigureOrTable) {
+      const labelMatch = (block.alt || block.caption || "").match(/(Figure|Table)\s+\d+/i);
+      const figureLabel = labelMatch ? labelMatch[0] : "";
+      return (
+        <figure className="my-10">
+          {figureLabel && (
+            <div className="mb-3">
+              <span className="font-body text-[11px] tracking-[0.2em] uppercase text-gold/80 font-semibold">
+                {figureLabel}
+              </span>
+            </div>
+          )}
+          <div className="bg-white border border-foreground/[0.08] rounded-sm p-3 md:p-5">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <SafeImg
+              src={block.src}
+              alt={block.alt || ""}
+              className="w-full object-contain max-h-[720px] mx-auto"
+              onError={(e) => {
+                const fig = e.currentTarget.closest("figure") as HTMLElement | null;
+                if (fig) fig.style.display = "none";
+              }}
+            />
+          </div>
+          {block.caption && block.caption !== figureLabel && (
+            <figcaption className="mt-3 text-center font-body text-sm text-foreground/50 italic">
+              {block.caption}
+            </figcaption>
+          )}
+        </figure>
+      );
+    }
+
     return (
       <figure
-        className={`my-8 ${useContain ? "bg-white p-2 md:p-4 rounded-sm" : ""}`}
+        className={`my-10 ${useContain ? "bg-white p-2 md:p-4 rounded-sm" : ""}`}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <SafeImg
@@ -416,7 +515,7 @@ function RenderBlock({ block, index }: { block: Block; index: number }) {
           }}
         />
         {block.caption && (
-          <figcaption className="mt-2 text-center font-body text-sm text-foreground/40 italic">
+          <figcaption className="mt-3 text-center font-body text-sm text-foreground/50 italic">
             {block.caption}
           </figcaption>
         )}
@@ -428,7 +527,7 @@ function RenderBlock({ block, index }: { block: Block; index: number }) {
 }
 
 // ─── Wide block types ─────────────────────────────────────────────────────────
-const WIDE_BLOCK_TYPES = new Set(["skill-grid", "image-text-split", "quote-grid"]);
+const WIDE_BLOCK_TYPES = new Set(["skill-grid", "image-text-split", "quote-grid", "callout"]);
 
 // ─── Footer ─────────────────────────────────────────────────────────────────
 function Footer() {
@@ -473,7 +572,26 @@ function Footer() {
 
 // ─── Progress bar ────────────────────────────────────────────────────────────
 function ReadingProgress() {
-  return null; // Can enhance later
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      setProgress(docHeight > 0 ? Math.min((scrollTop / docHeight) * 100, 100) : 0);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return (
+    <div className="fixed top-20 left-0 right-0 z-40 h-[2px] bg-transparent">
+      <div
+        className="h-full bg-gold/70 transition-[width] duration-150 ease-out"
+        style={{ width: `${progress}%` }}
+      />
+    </div>
+  );
 }
 
 // ─── Main Component ──────────────────────────────────────────────────────────
@@ -522,6 +640,7 @@ export default function ArticleDetailContent({
   return (
     <div className="min-h-screen bg-white">
       <Nav />
+      <ReadingProgress />
 
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
       <section className="relative bg-navy overflow-hidden pt-20">
@@ -605,21 +724,27 @@ export default function ArticleDetailContent({
 
       {/* ── ARTICLE BODY ─────────────────────────────────────────────────── */}
       <article className="bg-background py-14 lg:py-20">
-        {contentBlocks.map((block, i) => {
-          const isWide = WIDE_BLOCK_TYPES.has(block.type);
-          return (
-            <div
-              key={i}
-              className={
-                isWide
-                  ? "max-w-5xl mx-auto px-6 lg:px-12"
-                  : "max-w-3xl mx-auto px-6 lg:px-12"
-              }
-            >
-              <RenderBlock block={block} index={i} />
-            </div>
-          );
-        })}
+        {(() => {
+          let inAbstract = false;
+          return contentBlocks.map((block, i) => {
+            if (block.type === "heading" && block.level === 2) {
+              inAbstract = (block as any).text.toLowerCase().includes("abstract");
+            }
+            const isWide = WIDE_BLOCK_TYPES.has(block.type);
+            return (
+              <div
+                key={i}
+                className={
+                  isWide
+                    ? "max-w-5xl mx-auto px-6 lg:px-12"
+                    : "max-w-3xl mx-auto px-6 lg:px-12"
+                }
+              >
+                <RenderBlock block={block} index={i} isAbstract={inAbstract && block.type === "paragraph"} />
+              </div>
+            );
+          });
+        })()}
       </article>
 
       {/* ── CTA STRIP ────────────────────────────────────────────────────── */}

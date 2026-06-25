@@ -89,6 +89,18 @@
   }
 }
 
+/* Article inline links */
+.article-body-text a {
+  color: hsl(var(--brand-gold));
+  text-decoration: underline;
+  text-decoration-color: hsl(var(--brand-gold) / 0.3);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.2s;
+}
+.article-body-text a:hover {
+  text-decoration-color: hsl(var(--brand-gold));
+}
+
 /* Scroll behavior */
 html {
   scroll-behavior: smooth;

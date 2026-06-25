@@ -4666,8 +4666,9 @@
         "text": "At Being at Full Potential, we are a new generation of global connectors and change agents to support and equip leaders, managers, and employees in making human potential realization the centerpiece for strategic transformation in their organizations."
       },
       {
-        "type": "paragraph",
-        "text": "First, say to yourself what you would be, and then do what you must do. This ties in with our theme throughout this paper: When the Being comes alive, the Doing thrives. Being alive is when we live a fulfilled and meaningful life by realizing and actualizing our full human potential."
+        "type": "callout",
+        "text": "When the Being comes alive, the Doing thrives. Being alive is when we live a fulfilled and meaningful life by realizing and actualizing our full human potential.",
+        "label": "Core Thesis"
       },
       {
         "type": "image",
@@ -4702,7 +4703,7 @@
       },
       {
         "type": "paragraph",
-        "text": "Based on Gallup's State of Global Workplace survey, the rate of employee engagement in New Zealand is still just 24 percent (though among the highest in the world). 60 percent of our workforce is not engaged — they are uninspired, lack motivation, and would do just enough to fulfill their job requirements — and a further 16 percent are actively disengaged."
+        "text": "Based on <a href=\"https://www.gallup.com/workplace/349484/state-of-the-global-workplace.aspx\" target=\"_blank\" rel=\"noopener noreferrer\">Gallup's State of the Global Workplace survey</a>, the rate of employee engagement in New Zealand is still just 24 percent (though among the highest in the world). 60 percent of our workforce is not engaged — they are uninspired, lack motivation, and would do just enough to fulfill their job requirements — and a further 16 percent are actively disengaged."
       },
       {
         "type": "image",
@@ -4721,7 +4722,7 @@
       },
       {
         "type": "paragraph",
-        "text": "What drives sustainable confidence and employee engagement is purpose, not profit. The Deloitte Core Beliefs and Culture Survey (2014) points out that organizations with a strong sense of purpose are far more likely to create a best-place-to-work culture that drives innovation, embraces diversity, and helps employees reach their full potential compared to organizations that do not."
+        "text": "What drives sustainable confidence and employee engagement is purpose, not profit. The <a href=\"https://www2.deloitte.com/us/en/pages/about-deloitte/articles/culture-of-purpose.html\" target=\"_blank\" rel=\"noopener noreferrer\">Deloitte Core Beliefs and Culture Survey (2014)</a> points out that organizations with a strong sense of purpose are far more likely to create a best-place-to-work culture that drives innovation, embraces diversity, and helps employees reach their full potential compared to organizations that do not."
       },
       {
         "type": "image",
@@ -4804,7 +4805,7 @@
       },
       {
         "type": "paragraph",
-        "text": "This is the Integral Map (Integral Four Quadrants Theory) developed by Ken Wilber — a comprehensive map that is genuinely inclusive of the basic dimensions, levels, and lines that are the major potentials of all humans. Quadrants refer to four major perspectives through which any phenomenon can be looked at."
+        "text": "This is the <a href=\"https://integrallife.com/four-quadrants/\" target=\"_blank\" rel=\"noopener noreferrer\">Integral Map (Integral Four Quadrants Theory)</a> developed by <a href=\"https://en.wikipedia.org/wiki/Ken_Wilber\" target=\"_blank\" rel=\"noopener noreferrer\">Ken Wilber</a> — a comprehensive map that is genuinely inclusive of the basic dimensions, levels, and lines that are the major potentials of all humans. Quadrants refer to four major perspectives through which any phenomenon can be looked at."
       },
       {
         "type": "paragraph",
@@ -4867,7 +4868,7 @@
       },
       {
         "type": "paragraph",
-        "text": "In an article by McKinsey & Company titled \"Why leadership-development programs fail,\" it is stated that over $14 billion annually is spent on leadership development. Yet only 7 percent of senior managers polled by a UK business school think that their companies develop global leaders effectively."
+        "text": "In an article by <a href=\"https://www.mckinsey.com/capabilities/people-and-organizational-performance/our-insights/why-leadership-development-programs-fail\" target=\"_blank\" rel=\"noopener noreferrer\">McKinsey &amp; Company titled \"Why leadership-development programs fail,\"</a> it is stated that over $14 billion annually is spent on leadership development. Yet only 7 percent of senior managers polled by a UK business school think that their companies develop global leaders effectively."
       },
       {
         "type": "paragraph",
@@ -4875,7 +4876,7 @@
       },
       {
         "type": "paragraph",
-        "text": "We can also take the case of CSR. The Cone 2015 Global CSR Study shows that companies have many opportunities to become more genuine in their CSR efforts. However, the study hardly ever addresses the individual mindset and inner being perspective — yet this could be the missing link. It is the inner transformation and awakening that needs to occur in organizations before their products and services can genuinely start meeting the needs of the conscious consumer."
+        "text": "We can also take the case of CSR. The <a href=\"https://conecomm.com/2015-cone-communications-ebiquity-global-csr-study/\" target=\"_blank\" rel=\"noopener noreferrer\">Cone 2015 Global CSR Study</a> shows that companies have many opportunities to become more genuine in their CSR efforts. However, the study hardly ever addresses the individual mindset and inner being perspective — yet this could be the missing link. It is the inner transformation and awakening that needs to occur in organizations before their products and services can genuinely start meeting the needs of the conscious consumer."
       },
       {
         "type": "heading",
@@ -4907,7 +4908,7 @@
       },
       {
         "type": "paragraph",
-        "text": "For example, in an article by Frederic Laloux in Strategy + Business Magazine (6 July 2015), he states that Teal organizations invite people to reclaim their inner wholeness. They create an environment wherein people feel free to fully express themselves, bringing unprecedented levels of energy, passion, and creativity to work."
+        "text": "For example, in an article by <a href=\"https://www.strategy-business.com/article/00344\" target=\"_blank\" rel=\"noopener noreferrer\">Frederic Laloux in Strategy + Business Magazine (6 July 2015)</a>, he states that Teal organizations invite people to reclaim their inner wholeness. They create an environment wherein people feel free to fully express themselves, bringing unprecedented levels of energy, passion, and creativity to work."
       },
       {
         "type": "paragraph",
@@ -5005,8 +5006,9 @@
         "caption": "Figure 9"
       },
       {
-        "type": "paragraph",
-        "text": "When we unlock people's inner potential, we also help open corporate potential. Companies are at their creative best when employees have a high state of actualized human potential."
+        "type": "callout",
+        "text": "When we unlock people's inner potential, we also help open corporate potential. Companies are at their creative best when employees have a high state of actualized human potential.",
+        "label": "Key Insight"
       },
       {
         "type": "paragraph",
@@ -5065,7 +5067,7 @@
       },
       {
         "type": "blockquote",
-        "text": "To thrive in this wilderness and come to love it, you'll need new muscles and new ways of making sense of the world around you, new practices that will augment your current approach. — Jennifer Garvey Berger and Keith Johnston"
+        "text": "To thrive in this wilderness and come to love it, you'll need new muscles and new ways of making sense of the world around you, new practices that will augment your current approach. — Jennifer Garvey Berger and Keith Johnston, Simple Habits for Complex Times"
       },
       {
         "type": "heading",
