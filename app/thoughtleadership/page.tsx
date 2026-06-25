@@ -21,7 +21,7 @@ export const metadata: Metadata = {
       "Explore 50+ articles spanning a decade of research and insight on human potential, conscious leadership, and organizational transformation.",
     images: [
       {
-        url: "/wp-content/uploads/2026/04/Heading.png",
+        url: "/brand/og-realize-your-full-potential.png",
         width: 1200,
         height: 630,
       },

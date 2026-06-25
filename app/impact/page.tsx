@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     title: "Impact | BEING at Full Potential",
     description:
       "Real results from organizations worldwide. Client stories, case studies, and testimonials from leaders who have experienced transformational change.",
-    images: ["/wp-content/uploads/2019/09/10626797_1218979294781847_4220713866197897045_n.jpg"],
+    images: [{ url: "/brand/og-realize-your-full-potential.png", width: 1200, height: 630 }],
   },
 };
 

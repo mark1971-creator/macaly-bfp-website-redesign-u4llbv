@@ -20,7 +20,7 @@ export const metadata: Metadata = {
       "Access new horizons. We relentlessly challenge existing beliefs about success, performance, happiness and the constructs that limit meaningful change.",
     images: [
       {
-        url: "/wp-content/uploads/2026/04/Heading.png",
+        url: "/brand/og-realize-your-full-potential.png",
         width: 1200,
         height: 630,
       },

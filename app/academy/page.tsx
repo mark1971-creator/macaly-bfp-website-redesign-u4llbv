@@ -9,10 +9,10 @@ export const metadata: Metadata = {
     description: "ICF Approved · 25 CCEUs · 11 immersive modules. Become a certified Human Potential Coach and support leaders to work and thrive from their Full Potential.",
     images: [
       {
-        url: "https://images.pexels.com/photos/29347332/pexels-photo-29347332.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-        width: 940,
-        height: 650,
-        alt: "Misty forest trail — BEING at Full Potential Academy",
+        url: "/brand/og-realize-your-full-potential.png",
+        width: 1200,
+        height: 630,
+        alt: "Realize Your Full Potential — BEING at Full Potential",
       },
     ],
   },
