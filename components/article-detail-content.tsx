@@ -258,7 +258,7 @@ function ImageTextSplitBlock({
 }
 
 // ─── Block renderer ─────────────────────────────────────────────────────────
-function RenderBlock({ block, index, isAbstract }: { block: Block; index: number; isAbstract?: boolean }) {
+function RenderBlock({ block, index, isAbstract, isFirstH2 }: { block: Block; index: number; isAbstract?: boolean; isFirstH2?: boolean }) {
   if (block.type === "skill-grid") {
     return <SkillGridBlock block={block} />;
   }
@@ -286,7 +286,7 @@ function RenderBlock({ block, index, isAbstract }: { block: Block; index: number
     const letteredMatch = block.text.match(/^([a-z])\.\s+(.+)$/i);
     const romanMatch = block.text.match(/^([ivx]+)\.\s+(.+)$/i);
 
-    const sectionDivider = block.level === 2 && index > 0 ? (
+    const sectionDivider = block.level === 2 && index > 0 && !isFirstH2 ? (
       <div className="mt-16 mb-6 flex items-center gap-4">
         <div className="h-px flex-1 bg-gold/15" />
         <div className="w-1.5 h-1.5 rounded-full bg-gold/30" />
@@ -726,8 +726,11 @@ export default function ArticleDetailContent({
       <article className="bg-background py-14 lg:py-20">
         {(() => {
           let inAbstract = false;
+          let seenFirstH2 = false;
           return contentBlocks.map((block, i) => {
+            let firstH2 = false;
             if (block.type === "heading" && block.level === 2) {
+              if (!seenFirstH2) { firstH2 = true; seenFirstH2 = true; }
               inAbstract = (block as any).text.toLowerCase().includes("abstract");
             }
             const isWide = WIDE_BLOCK_TYPES.has(block.type);
@@ -740,7 +743,7 @@ export default function ArticleDetailContent({
                     : "max-w-3xl mx-auto px-6 lg:px-12"
                 }
               >
-                <RenderBlock block={block} index={i} isAbstract={inAbstract && block.type === "paragraph"} />
+                <RenderBlock block={block} index={i} isAbstract={inAbstract && block.type === "paragraph"} isFirstH2={firstH2} />
               </div>
             );
           });
