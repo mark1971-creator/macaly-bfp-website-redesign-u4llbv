@@ -4641,6 +4641,12 @@
     "type": "article",
     "blocks": [
       {
+        "type": "image",
+        "src": "/images/articles/leading-evolutionary-change-human-potential/quote-de-geus-living-company.jpg",
+        "alt": "Arie de Geus — What makes a company a living company?",
+        "caption": ""
+      },
+      {
         "type": "heading",
         "level": 2,
         "text": "Abstract"
@@ -4658,6 +4664,12 @@
         "text": "However, our management toolkit falls short and needs to deliver against these new demands. This paper introduces concepts to illustrate where most organization development (OD) funds are currently being spent, why these investments are no longer yielding results, and where the next wave of OD focus needs to be. We also offer a concrete alternative that allows organizations to shift their attention from systems-based OD interventions to mindset and inner-being-based OD interventions in a structured and systematic way."
       },
       {
+        "type": "image",
+        "src": "/images/articles/leading-evolutionary-change-human-potential/quote-de-geus-corporate-potential.jpg",
+        "alt": "Arie de Geus — Members' potential and corporate potential",
+        "caption": ""
+      },
+      {
         "type": "paragraph",
         "text": "Shifting OD interventions this way will better align the individual's passion and talents with the organization's collective purpose. Harnessing this untapped potential will inevitably unleash a massive wave of inspiration and value creation in the marketplace."
       },
@@ -4669,18 +4681,6 @@
         "type": "callout",
         "text": "When the Being comes alive, the Doing thrives. Being alive is when we live a fulfilled and meaningful life by realizing and actualizing our full human potential.",
         "label": "Core Thesis"
-      },
-      {
-        "type": "image",
-        "src": "/images/articles/leading-evolutionary-change-human-potential/quote-de-geus-living-company.jpg",
-        "alt": "Arie de Geus — What makes a company a living company?",
-        "caption": ""
-      },
-      {
-        "type": "image",
-        "src": "/images/articles/leading-evolutionary-change-human-potential/quote-de-geus-corporate-potential.jpg",
-        "alt": "Arie de Geus — Members' potential and corporate potential",
-        "caption": ""
       },
       {
         "type": "heading",

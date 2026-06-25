@@ -309,7 +309,7 @@ function RenderBlock({ block, index, isAbstract }: { block: Block; index: number
           {sectionDivider}
           <div className={`flex items-baseline gap-4 ${isLarge ? "mt-10 mb-5" : "mt-8 mb-4"}`}>
             <span className={`shrink-0 font-display text-gold leading-none tabular-nums ${numSize}`}>
-              {num}
+              {num}.
             </span>
             <Tag className={`${sizeMap[block.level] || sizeMap[2]} mt-0 mb-0 flex-1 min-w-0`}>
               {cleanTitle}
