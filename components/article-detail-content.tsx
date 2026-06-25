@@ -286,6 +286,10 @@ function RenderBlock({ block, index, isAbstract, isFirstH2 }: { block: Block; in
     const letteredMatch = block.text.match(/^([a-z])\.\s+(.+)$/i);
     const romanMatch = block.text.match(/^([ivx]+)\.\s+(.+)$/i);
 
+    const h2Class = isFirstH2
+      ? "font-display text-2xl md:text-3xl font-light text-navy leading-tight mt-2 mb-5"
+      : sizeMap[2];
+
     const sectionDivider = block.level === 2 && index > 0 && !isFirstH2 ? (
       <div className="mt-16 mb-6 flex items-center gap-4">
         <div className="h-px flex-1 bg-gold/15" />
@@ -349,7 +353,7 @@ function RenderBlock({ block, index, isAbstract, isFirstH2 }: { block: Block; in
     return (
       <>
         {sectionDivider}
-        <Tag className={sizeMap[block.level] || sizeMap[2]}>
+        <Tag className={(block.level === 2 && isFirstH2 ? h2Class : sizeMap[block.level]) || sizeMap[2]}>
           {cleanText}
         </Tag>
       </>
@@ -723,7 +727,7 @@ export default function ArticleDetailContent({
       )}
 
       {/* ── ARTICLE BODY ─────────────────────────────────────────────────── */}
-      <article className="bg-background py-14 lg:py-20">
+      <article className={`bg-background ${article.type === "case-study" && caseStudyIntro.length > 0 ? "pt-4 lg:pt-6 pb-14 lg:pb-20" : "py-14 lg:py-20"}`}>
         {(() => {
           let inAbstract = false;
           let seenFirstH2 = false;
