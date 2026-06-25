@@ -29,16 +29,16 @@ export const metadata: Metadata = {
       "Specializing in Human Potential development to enable breakthroughs in employee engagement, innovation and the bottom line.",
     images: [
       {
-        url: "/brand/og-measure-what-matters.png",
+        url: "/brand/og-realize-your-full-potential.png",
         width: 1200,
         height: 630,
-        alt: "Measure What Matters Most — Human Potential Assessment by BEING at Full Potential",
+        alt: "Realize Your Full Potential — BEING at Full Potential",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    images: ["/brand/og-measure-what-matters.png"],
+    images: ["/brand/og-realize-your-full-potential.png"],
   },
 };
 
