@@ -897,8 +897,9 @@
         "text": "Looking back 3 years later, here are the highlights:"
       },
       {
-        "type": "paragraph",
-        "text": "1. A new vision:"
+        "type": "heading",
+        "level": 3,
+        "text": "1. A New Vision"
       },
       {
         "type": "paragraph",
@@ -910,24 +911,27 @@
         "label": "Vision"
       },
       {
-        "type": "paragraph",
-        "text": "2. New platform for Human Potential Development :"
+        "type": "heading",
+        "level": 3,
+        "text": "2. New Platform for Human Potential Development"
       },
       {
         "type": "paragraph",
         "text": "This online portal goes well beyond the assessment platform that served us well in the early years. Beingatfullpotential.io is a doorway to abundant resources, practical exercises and tools that can be scaled to truly democratize self-actualization on a global scale. The platform is free to use (donations are welcome so we can continue to invest in future developments and keep the barriers to entry as low as possible)."
       },
       {
-        "type": "paragraph",
-        "text": "3. New Academy for Human Potential Learning & Development:"
+        "type": "heading",
+        "level": 3,
+        "text": "3. New Academy for Human Potential Learning & Development"
       },
       {
         "type": "paragraph",
         "text": "All our Human Potential Development courses are now available on the Academy platform . Whether it’s a Coach who wants to get certified or an “employee” seeking more meaning and purpose in their work, the learning journey can start at any time. All course content, including videos for each module, worksheets, assignments, quizzes and reading material are easily accessible and delivered in an affordable way."
       },
       {
-        "type": "paragraph",
-        "text": "4. New alliances & partnerships:"
+        "type": "heading",
+        "level": 3,
+        "text": "4. New Alliances & Partnerships"
       },
       {
         "type": "paragraph",
