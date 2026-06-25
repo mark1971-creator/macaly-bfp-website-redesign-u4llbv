@@ -12,10 +12,14 @@ export function formatArticleDate(iso: string): string {
   });
 }
 
+function stripHtml(html: string): string {
+  return html.replace(/<[^>]*>/g, "");
+}
+
 export function getExcerpt(article: ArticleData, maxLen = 220): string {
   for (const block of article.blocks) {
     if (block.type === "paragraph" && block.text.length > 40) {
-      const text = block.text.trim();
+      const text = stripHtml(block.text).trim();
       return text.length <= maxLen ? text : `${text.slice(0, maxLen).trim()}…`;
     }
   }

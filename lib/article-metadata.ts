@@ -14,7 +14,7 @@ type ArticleLike = {
 
 function firstParagraph(article: ArticleLike): string {
   const block = article.blocks.find((b) => b.type === "paragraph" && b.text?.trim());
-  return block?.text?.trim() ?? "";
+  return (block?.text?.trim() ?? "").replace(/<[^>]*>/g, "");
 }
 
 function absoluteImageUrl(image?: string): string {
