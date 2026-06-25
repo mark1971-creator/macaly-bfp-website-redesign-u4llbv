@@ -1107,32 +1107,84 @@
         ]
       },
       {
-        "type": "callout",
-        "text": "As long as HR continues to approach Employee Experience as something within their control versus something to be unleashed within their people, we will fail to make significant progress. The next frontier is workplace actualization.",
-        "label": "Key Insight"
+        "type": "heading",
+        "level": 2,
+        "text": "1. Diminishing Returns and the Need for Workplace Actualization"
       },
       {
-        "type": "ol",
-        "items": [
-          "Diminishing returns on Employee Experience programs and the need for Workplace Actualization. Once the basic hygiene factors are in place (safety, comfort & respect), people yearn to express higher order needs. We seek meaning, purpose, impact. We want to contribute our gifts and talents, be creative and stretch ourselves into new territory. No amount of perks, fancy coffee or fun activities will make up for this deeper human yearning. As long as HR continues to approach Employee Experience as something within their control vs something to be unleashed within their people we will fail to make significant progress. In fact, we might even see diminishing returns.In this next paradigm of Employee Experience there will be a shift from workplace optimization to workplace actualization. We will need to build upon the hygiene factors that have brought higher levels of safety, comfort and respect into the workplace. The next frontier invites us into a place where employees discover pathways to self-actualization through their work and take greater responsibility for the experience they have with the organization.",
-          "Employee Experience as an attitude rather than a condition Until now much of the talk about Employee Experience has revolved around optimizing the work environment and conditions. Employees are the “customers” and their experience, or happiness, is the responsibility of the employer, like the happiness of a child being the responsibility of the parent. Although this type of dependent relationship is absolutely necessary during the fist stage of a child’s development, as we grow older and gain in maturity, we discover that our happiness, or experience of life, is at least as much dependent on our state of mind as it is on the circumstances of our life. We realize that no matter how challenging things are, there is always something to be grateful for. The more we cultivate this attitude of abundance the more we are able to attract the right people and opportunities into our life.At work it’s the same. We need to start to think about Employee Experience as everyone’s responsibility. We can do so by cultivating the right mindsets and encouraging each other to grow and develop to higher levels of maturity or consciousness. In this way we gain more control over how we internalize and interpret the ever changing organizational dynamics. For example, when dealing with critical feedback or a toxic boss we will have the capacity to step back, observe the triggers and then respond from a deeper place of listening, compassion, curiosity or any other state that creates openness for dialogue and understanding.Our EXPERIENCE of the situation can then shift from being the “victim” of an unpleasant work relationship to being the conscious creator who is making the most of an unpleasant situation. Our experience of work is no longer dependent on external factors, instead it is a choice, or a series of choices, that we make moment to moment to shape the reality of our work life.",
-          "What does this mean for HR leaders? Self-actualization and taking responsibility for the way we experience work are 2 sides of the same coin. The yearning that so many of us have for deeper purpose and meaning in our work & life cannot be outsourced to an employer. The journey of self-actualization must come from within. As we discover our values and WHY in life it may not immediately be clear how it synchronizes with the WHY of the organization. This, however, does not mean it doesn’t exist.As HR leaders, we can encourage this exploration and take small steps to support our people as they discover more of who they are and grow in their self-leadership. We can think of it as a more balanced approach to managing talent, one where vertical development (growth in how we see ourselves & role in the world) and horizontal development (growth in our skills & capabilities) are given equal weight. The following image shows the interaction between these two axes. We can see that the area of influence and impact increases when vertical development is encouraged alongside the horizontal development axis."
-        ]
+        "type": "paragraph",
+        "text": "Once the basic hygiene factors are in place (safety, comfort & respect), people yearn to express higher order needs. We seek meaning, purpose, impact. We want to contribute our gifts and talents, be creative and stretch ourselves into new territory. No amount of perks, fancy coffee or fun activities will make up for this deeper human yearning."
       },
       {
-        "type": "image",
-        "src": "/images/articles/improving-employee-experience/inline-01.jpg",
-        "alt": "Vertical vs horizontal learning",
-        "caption": "Vertical vs horizontal learning"
+        "type": "paragraph",
+        "text": "As long as HR continues to approach Employee Experience as something within their control vs something to be unleashed within their people, we will fail to make significant progress. In fact, we might even see diminishing returns."
       },
       {
         "type": "callout",
-        "text": "Employee Experience must shift from being the employer's responsibility to everyone's responsibility - cultivating the right mindsets so our experience of work becomes a conscious choice, not a condition imposed upon us.",
+        "text": "In this next paradigm of Employee Experience there will be a shift from workplace optimization to workplace actualization. The next frontier invites us into a place where employees discover pathways to self-actualization through their work.",
         "label": "Key Insight"
       },
       {
         "type": "paragraph",
-        "text": "How can BEING at Full Potential help:"
+        "text": "We will need to build upon the hygiene factors that have brought higher levels of safety, comfort and respect into the workplace. The next frontier invites us into a place where employees discover pathways to self-actualization through their work and take greater responsibility for the experience they have with the organization."
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "2. Employee Experience as an Attitude Rather Than a Condition"
+      },
+      {
+        "type": "paragraph",
+        "text": "Until now much of the talk about Employee Experience has revolved around optimizing the work environment and conditions. Employees are the “customers” and their experience, or happiness, is the responsibility of the employer, like the happiness of a child being the responsibility of the parent."
+      },
+      {
+        "type": "paragraph",
+        "text": "Although this type of dependent relationship is absolutely necessary during the first stage of a child’s development, as we grow older and gain in maturity, we discover that our happiness, or experience of life, is at least as much dependent on our state of mind as it is on the circumstances of our life. We realize that no matter how challenging things are, there is always something to be grateful for. The more we cultivate this attitude of abundance the more we are able to attract the right people and opportunities into our life."
+      },
+      {
+        "type": "paragraph",
+        "text": "At work it’s the same. We need to start to think about Employee Experience as everyone’s responsibility. We can do so by cultivating the right mindsets and encouraging each other to grow and develop to higher levels of maturity or consciousness. In this way we gain more control over how we internalize and interpret the ever changing organizational dynamics."
+      },
+      {
+        "type": "paragraph",
+        "text": "For example, when dealing with critical feedback or a toxic boss we will have the capacity to step back, observe the triggers and then respond from a deeper place of listening, compassion, curiosity or any other state that creates openness for dialogue and understanding."
+      },
+      {
+        "type": "callout",
+        "text": "Our experience of work is no longer dependent on external factors. Instead it is a choice, or a series of choices, that we make moment to moment to shape the reality of our work life.",
+        "label": "Key Insight"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "3. What Does This Mean for HR Leaders?"
+      },
+      {
+        "type": "paragraph",
+        "text": "Self-actualization and taking responsibility for the way we experience work are two sides of the same coin. The yearning that so many of us have for deeper purpose and meaning in our work & life cannot be outsourced to an employer. The journey of self-actualization must come from within."
+      },
+      {
+        "type": "paragraph",
+        "text": "As we discover our values and WHY in life it may not immediately be clear how it synchronizes with the WHY of the organization. This, however, does not mean it doesn’t exist."
+      },
+      {
+        "type": "paragraph",
+        "text": "As HR leaders, we can encourage this exploration and take small steps to support our people as they discover more of who they are and grow in their self-leadership. We can think of it as a more balanced approach to managing talent, one where vertical development (growth in how we see ourselves & role in the world) and horizontal development (growth in our skills & capabilities) are given equal weight."
+      },
+      {
+        "type": "paragraph",
+        "text": "The following image shows the interaction between these two axes. We can see that the area of influence and impact increases when vertical development is encouraged alongside the horizontal development axis."
+      },
+      {
+        "type": "image",
+        "src": "/images/articles/improving-employee-experience/inline-01.jpg",
+        "alt": "Figure 1 — Vertical vs horizontal learning",
+        "caption": "Vertical vs horizontal learning"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "How Can BEING at Full Potential Help?"
       },
       {
         "type": "paragraph",
@@ -1143,8 +1195,9 @@
         "text": "Our bespoke program for junior managers and emerging leaders can easily be deployed at scale in an affordable way. It’s a combination of a self-paced online training and full access to our platform for Human Potential Development. Here’s an overview of the benefits:"
       },
       {
-        "type": "paragraph",
-        "text": "Online, self-paced workplace actualization training (5 modules) :"
+        "type": "heading",
+        "level": 3,
+        "text": "Online, Self-Paced Workplace Actualization Training"
       },
       {
         "type": "ul",
@@ -1157,8 +1210,9 @@
         ]
       },
       {
-        "type": "paragraph",
-        "text": "Portal for Human Potential Realization:"
+        "type": "heading",
+        "level": 3,
+        "text": "Portal for Human Potential Realization"
       },
       {
         "type": "paragraph",
