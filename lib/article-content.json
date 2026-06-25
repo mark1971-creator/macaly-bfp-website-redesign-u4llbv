@@ -3758,8 +3758,17 @@
     "image": "/images/articles/business-case-human-potential-realisation.jpg",
     "blocks": [
       {
+        "type": "heading",
+        "level": 2,
+        "text": "Case Study"
+      },
+      {
         "type": "paragraph",
-        "text": "In this case study you will discover how a London-based supermarket, Thornton’s Budgens, took significant steps to realise more of the Human Potential of its organisation and as a result created a breakthrough in business performance. You will also learn that these kinds of subjective human-centric interventions can be measured, analysed and re-applied in different contexts to transform businesses. Hopefully this will inspire you to go on a similar journey for your business."
+        "text": "Discover how a London-based supermarket took significant steps to realise more of the Human Potential of its organisation and created a breakthrough in business performance."
+      },
+      {
+        "type": "paragraph",
+        "text": "A partnership between Thornton’s Budgens & Being at Full Potential"
       },
       {
         "type": "image",
